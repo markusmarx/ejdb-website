@@ -12,13 +12,13 @@ EJDB aims to be a fast MongoDB-like library which can be embedded into C/C++,
 .. toctree::
    :maxdepth: 2
 
-   ejdbclibrary
-   buildinginstallation
-   samples
+   intro/ejdbclibrary
+   installation/buildinginstallation
+   samples/samples
    capi
-   queries
-   dataimport
-   collectionjoins
+   ql/queries
+   misc/dataimport
+   misc/collectionjoins
    developmentfaq
 
 
