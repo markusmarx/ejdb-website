@@ -7,9 +7,9 @@ Installation on Windows
 Precompiled windows binaries
 ############################
 
-:download:`tcejdb-1.1.26-mingw32-x86_64 <tcejdb-1.1.26-mingw32-x86_64.zip>`
+`tcejdb-1.1.26-mingw32-x86_64 <tcejdb-1.1.26-mingw32-x86_64.zip>`
 
-:download:`tcejdb-1.1.26-mingw32-i686 <tcejdb-1.1.26-mingw32-i686.zip>`
+`tcejdb-1.1.26-mingw32-i686 <tcejdb-1.1.26-mingw32-i686.zip>`
 
 Building EJDB and TokyoCabinet for windows
 ##########################################

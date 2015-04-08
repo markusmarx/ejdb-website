@@ -1,0 +1,29 @@
+window.DOCUMENTATION_OPTIONS = {
+    URL_ROOT:    '{{ url_root }}',
+    VERSION:     '{{ release|e }}',
+    COLLAPSE_INDEX: false,
+    FILE_SUFFIX: '{{ '' if no_search_suffix else file_suffix }}',
+    HAS_SOURCE:  {{ has_source|lower }}
+}
+
+jQuery(function() {
+    initMaterialize();
+    initTopNav();
+});
+
+function initMaterialize() {
+    $(".button-collapse").sideNav();
+    $(".dropdown-button").dropdown({'hover' : false});
+    $("select").not(".disabled").material_select();
+}
+
+
+function initTopNav() {
+    $("a#toggle-search").click(function() {
+        var el = $("div#search");
+        el.is(":visible") ? el.slideUp() : el.slideDown(function() {
+            el.find("input").focus();
+        });
+        return false;
+    });
+}

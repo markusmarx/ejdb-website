@@ -50,6 +50,7 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 html:
+	make -C sphinxext/sphinx_material_theme
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
