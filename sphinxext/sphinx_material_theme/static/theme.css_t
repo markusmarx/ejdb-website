@@ -10111,24 +10111,28 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help; }
 
-/* line 41, ../scss/theme.scss */
+/* line 38, ../scss/theme.scss */
+body {
+  background-color: #f4f4f4; }
+
+/* line 45, ../scss/theme.scss */
 nav ul li:hover, nav ul li.active {
   background-color: #0197D8; }
 
-/* line 48, ../scss/theme.scss */
+/* line 52, ../scss/theme.scss */
 #content {
-  padding-top: 0;
-  background-color: #f4f4f4; }
+  padding: 0;
+  margin: 0; }
 
 @media only screen and (max-width: 600px) {
-  /* line 54, ../scss/theme.scss */
+  /* line 58, ../scss/theme.scss */
   nav img {
     margin-top: 3px; } }
 @media only screen and (min-width: 600px) and (max-width: 992px) {
-  /* line 60, ../scss/theme.scss */
+  /* line 64, ../scss/theme.scss */
   nav img {
     margin-top: 7px; } }
 @media only screen and (min-width: 992px) {
-  /* line 66, ../scss/theme.scss */
+  /* line 70, ../scss/theme.scss */
   nav img {
     margin-top: 7px; } }

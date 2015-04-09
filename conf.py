@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # EJDB documentation build configuration file, created by
@@ -129,6 +129,12 @@ html_theme_options = {
     ]
 }
 
+html_sidebars = {
+    '**': [
+        'globaltoc.html'
+    ]
+}
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #html_theme = 'default'
@@ -218,22 +224,22 @@ htmlhelp_basename = 'EJDBdoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-# The paper size ('letterpaper' or 'a4paper').
-#'papersize': 'letterpaper',
+    # The paper size ('letterpaper' or 'a4paper').
+    #'papersize': 'letterpaper',
 
-# The font size ('10pt', '11pt' or '12pt').
-#'pointsize': '10pt',
+    # The font size ('10pt', '11pt' or '12pt').
+    #'pointsize': '10pt',
 
-# Additional stuff for the LaTeX preamble.
-#'preamble': '',
+    # Additional stuff for the LaTeX preamble.
+    #'preamble': '',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'EJDB.tex', 'EJDB Documentation',
-   'Softmotions', 'manual'),
+    ('index', 'EJDB.tex', 'EJDB Documentation',
+     'Softmotions', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -276,9 +282,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'EJDB', 'EJDB Documentation',
-   'Softmotions Ltd', 'EJDB', 'One line description of project.',
-   'Miscellaneous'),
+    ('index', 'EJDB', 'EJDB Documentation',
+     'Softmotions Ltd', 'EJDB', 'One line description of project.',
+     'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
