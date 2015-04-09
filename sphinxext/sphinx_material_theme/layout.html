@@ -1,65 +1,74 @@
-{%- block doctype -%}
+{% block doctype %}
 <!DOCTYPE html>
-{%- endblock %}
+{% endblock %}
 
-{%- set script_files = script_files + ['_static/materialize.js', '_static/prism.js', '_static/theme.js'] %}
-{%- if not embedded and docstitle %}
-{%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
-{%- else %}
-{%- set titlesuffix = "" %}
-{%- endif %}
+{% set script_files = script_files + ['_static/materialize.js', '_static/prism.js', '_static/theme.js'] %}
+{% if not embedded and docstitle %}
+{% set titlesuffix = " &mdash; "|safe + docstitle|e %}
+{% else %}
+{% set titlesuffix = "" %}
+{% endif %}
 
-
-{%- macro script() %}
-
-{%- for scriptfile in script_files %}
+{% macro script() %}
+{% for scriptfile in script_files %}
 <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
-{%- endfor %}
-{%- endmacro %}
+{% endfor %}
+{% endmacro %}
 
-{%- macro css() %}
+{% macro css() %}
 <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css"/>
 <link rel="stylesheet" href="{{ pathto('_static/prism.css', 1) }}" type="text/css"/>
-{%- for cssfile in css_files %}
+{% for cssfile in css_files %}
 <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css"/>
-{%- endfor %}
-{%- endmacro %}
+{% endfor %}
+{% endmacro %}
 
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset={{ encoding }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ metatags }}
-    {%- block htmltitle %}
+    {% block htmltitle %}
     <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
-    {%- endblock %}
+    {% endblock %}
     {{ css() }}
 </head>
 <body>
-{%- block topnav_popups -%}
-{%- endblock %}
+{% block topnav_popups %}
+{% endblock %}
 <header>
     <nav id="nav" class="grey darken-4">
         <div class="container">
             <div class="nav-wrapper">
-                {%- if logo %}
+                {% if logo %}
                 <a href="{{ pathto(master_doc) }}">
                     <img class="brand-logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
                 </a>
-                {%- endif %}
-                {%- block topnav -%}
+                {% endif %}
+                <a href="#" data-activates="nav-mobile-sidebar" class="button-collapse"><i
+                        class="mdi-navigation-menu"></i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    {%- for n, l in theme_top_nav_links %}
+                    {% block topnav_li_items %}
+                    {% for n, l in theme_top_nav_links %}
                     <li><a href="{{ pathto(l, 1) }}">{{ n }}</a></li>
-                    {%- endfor %}
+                    {% endfor %}
+                    {% endblock %}
                 </ul>
-                {%- endblock -%}
+                <ul class="side-nav" id="nav-mobile-sidebar">
+                    {{ self.topnav_li_items() }}
+                </ul>
             </div>
         </div>
     </nav>
 </header>
-
-
+<div id="content">
+    <div class="row white z-depth-1" id="relbar">
+        &nbsp;
+    </div>
+    <div class="container">
+        data
+    </div>
+</div>
 {{ script() }}
 </body>
 </html>
