@@ -5,7 +5,7 @@
 @import "materialize/components/mixins";
 @import "materialize/components/color";
 // Variables;
-@import "materialize/components/variables";
+@import "variables";
 // Reset
 @import "materialize/components/normalize";
 // components
@@ -52,6 +52,39 @@ nav {
 #content {
   padding: 0;
   margin: 0;
+}
+
+#side-toc {
+
+  > ul {
+    margin-top: 0;
+  }
+
+  .collapsible-header.active {
+    margin-bottom: 5px;
+  }
+
+  .mt-first {
+    margin-top: 5px;
+  }
+
+  ul.collapsible-body {
+    padding-bottom: 1rem;
+  }
+
+  ul.collapsible-body li, .mt-toclink {
+    padding: 0 1rem;
+  }
+
+  a.current {
+    font-weight: bold;
+  }
+}
+
+.page-content {
+  background-color: #fff;
+  padding: 10px;
+  @extend .z-depth-1
 }
 
 @media only screen and (max-width: 600px) {
