@@ -45,37 +45,41 @@ jQuery(function() {
             }
             tlfirst = false;
             var $aEl = $children.first();
+            /*$aEl.click(function(e) {
+                e.preventDefault();
+                window.setTimeout(function() {
+                    var href = $(e.delegateTarget).attr("href");
+                    if (href != null) {
+                        window.location.href = href;
+                    }
+                }, 300);
+            });*/
+
             var $uEl = $children.next();
             if ($aEl.parent().hasClass("current")) {
                 $aEl.addClass("active");
             }
+            //$aEl.addClass("collapsible-header waves-effect waves-teal z-depth-1");
             $aEl.addClass("collapsible-header z-depth-1");
             $uEl.addClass("collapsible-body");
         });
         res = res.find("> ul");
+
+        var pageContent = $("#page-content-block");
+        if (res.length) {
+            pageContent.css({"min-height" : res.height() + "px"});
+            new ResizeSensor(res[0], function() {
+                pageContent.css({"min-height" : (window.innerWidth <= 601 ? 0 : res.height()) + "px"});
+            });
+        } else {
+            pageContent.css({"min-height" : 0 + "px"});
+        }
         res.collapsible();
         res.each(function() {
             var $this = $(this);
             $this.off("click.collapse", ".collapsible-header");
             $this.find("> li > .collapsible-header").off("click.collapse");
         });
-
-
-        window.setTimeout(
-                function() {
-                    var sideToc = $("#side-toc > ul");
-                    if (sideToc.length) {
-                        if (sideToc.is(":visible")) {
-                            console.log("ST=" + sideToc.height());
-                            $(".page-content").css({"min-height" : sideToc.height() + "px"});
-                        } else {
-                            $(".page-content").css({"min-height" : 0 + "px"});
-                        }
-                    }
-                },
-                1000 //todo fixxx me!!!!
-        );
-
     }
 });
 

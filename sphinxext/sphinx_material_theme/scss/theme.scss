@@ -49,11 +49,6 @@ nav {
   }
 }
 
-#content {
-  padding: 0;
-  margin: 0;
-}
-
 #side-toc {
 
   > ul {
@@ -81,25 +76,68 @@ nav {
   }
 }
 
-.page-content {
+h1:hover > a.headerlink,
+h2:hover > a.headerlink,
+h3:hover > a.headerlink,
+h4:hover > a.headerlink,
+h5:hover > a.headerlink,
+h6:hover > a.headerlink,
+dt:hover > a.headerlink,
+caption:hover > a.headerlink,
+p.caption:hover > a.headerlink,
+div.code-block-caption:hover > a.headerlink {
+  visibility: visible;
+}
+
+a.headerlink {
+  visibility: hidden;
+}
+
+.toctree-wrapper > ul {
+  margin: 0;
+  padding: 10px 0 10px 20px;
+  background-color: #f4f4f4;
+}
+
+#page-content-block {
   background-color: #fff;
-  padding: 10px;
+  padding: 10px 0 0 15px;
   @extend .z-depth-1
 }
 
-@media only screen and (max-width: 600px) {
+.page-content {
+
+  ul {
+    margin: 0;
+  }
+
+  li {
+    margin-left: 15px;
+    list-style-type: disc;
+  }
+
+  li li {
+    list-style-type: circle;
+  }
+
+  li li li {
+    list-style-type: square;
+  }
+}
+
+@media #{$small-and-down} {
   nav img {
     margin-top: 3px;
   }
 }
 
-@media only screen and (min-width: 600px) and (max-width: 992px) {
+@media #{$medium-and-up} {
   nav img {
     margin-top: 7px;
   }
 }
 
-@media only screen and (min-width: 992px) {
+@media #{$large-and-up} {
   nav img {
     margin-top: 7px;
   }
