@@ -65,15 +65,15 @@
     &nbsp; {# todo #}
 </div>
 <div class="row">
-    <div id="side-toc" class="col s12 m4 l3">
-        {{ toctree(maxdepth=2, collapse=False, includehidden=True) }}
-    </div>
-    <div id="page-content-block" class="col s12 m8 l9">
-        <div class="page-content">
+    <div class="page-content-wrapper col s12 m8 l9">
+        <div id="page-content-block" class="page-content">
             {{ body }}
         </div>
         <div id="page-content-footer">
         </div>
+    </div>
+    <div id="side-toc" class="col s12 m4 l3">
+        {{ toctree(maxdepth=2, collapse=False, includehidden=True) }}
     </div>
 </div>
 

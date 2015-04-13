@@ -29,9 +29,10 @@ h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
 }
 
 pre {
+  @extend .z-depth-1;
   padding: 0.5em;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  //border-radius: 2px;
 }
 
 .highlight {

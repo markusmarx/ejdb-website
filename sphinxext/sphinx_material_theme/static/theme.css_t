@@ -2619,7 +2619,7 @@ ul {
   clear: both; }
 
 /* line 62, ../scss/materialize/components/_global.scss */
-.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav, #page-content-block, .page-content div.admonition.note, .page-content div.admonition.warning, .page-content div.admonition.error, .page-content div.admonition.seealso, .page-content div.topic, .page-content div.sidebar {
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav, .page-content, .page-content pre, .page-content div.admonition.note, .page-content div.admonition.warning, .page-content div.admonition.error, .page-content div.admonition.seealso, .page-content div.topic, .page-content div.sidebar {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
@@ -10075,13 +10075,15 @@ a.headerlink {
   font-weight: bold; }
 
 /* line 148, ../scss/theme.scss */
-#page-content-block {
-  background-color: #fff;
-  padding: 10px 10px 0 15px; }
+.page-content-wrapper {
+  padding: 0;
+  margin: 0; }
 
-/* line 154, ../scss/theme.scss */
+/* line 153, ../scss/theme.scss */
 .page-content {
-  padding-bottom: 15px;
+  background-color: #fff;
+  padding: 10px 15px 15px 15px;
+  margin: 0 10px 15px 15px;
   /* -- math display ---------------------------------------------------------- */
   /*table.docutils. td, table.docutils th {
     padding: 1px 8px 1px 5px;
@@ -10093,7 +10095,7 @@ a.headerlink {
   /* -- index page ------------------------------------------------------------ */
   /* -- general index --------------------------------------------------------- */
   /* -- search page ----------------------------------------------------------- */ }
-  /* line 158, ../scss/theme.scss */
+  /* line 160, ../scss/theme.scss */
   .page-content .section {
     padding-top: 0;
     padding-bottom: 0; }
@@ -10178,61 +10180,60 @@ a.headerlink {
   /* line 31, ../scss/_code.scss */
   .page-content pre {
     padding: 0.5em;
-    border: 1px solid #ccc;
-    border-radius: 4px; }
-  /* line 37, ../scss/_code.scss */
+    border: 1px solid #ccc; }
+  /* line 38, ../scss/_code.scss */
   .page-content .highlight {
     background-color: #f8f8f8; }
-  /* line 41, ../scss/_code.scss */
+  /* line 42, ../scss/_code.scss */
   .page-content td.linenos pre {
     padding: 0.5em 0;
     border: 0;
     background-color: transparent;
     color: #aaa; }
-  /* line 48, ../scss/_code.scss */
+  /* line 49, ../scss/_code.scss */
   .page-content table.highlighttable {
     margin-left: 0.5em; }
-    /* line 50, ../scss/_code.scss */
+    /* line 51, ../scss/_code.scss */
     .page-content table.highlighttable td {
       padding: 0 0.5em 0 0.5em; }
-  /* line 55, ../scss/_code.scss */
+  /* line 56, ../scss/_code.scss */
   .page-content div.code-block-caption {
     padding: 2px 5px;
     font-size: small; }
-    /* line 59, ../scss/_code.scss */
+    /* line 60, ../scss/_code.scss */
     .page-content div.code-block-caption code {
       background-color: transparent; }
-    /* line 63, ../scss/_code.scss */
+    /* line 64, ../scss/_code.scss */
     .page-content div.code-block-caption + div > div.highlight > pre {
       margin-top: 0; }
-    /* line 67, ../scss/_code.scss */
+    /* line 68, ../scss/_code.scss */
     .page-content div.code-block-caption span.caption-number {
       padding: 0.1em 0.3em;
       font-style: italic; }
-  /* line 76, ../scss/_code.scss */
+  /* line 77, ../scss/_code.scss */
   .page-content div.literal-block-wrapper {
     padding: 1em 1em 0; }
-    /* line 78, ../scss/_code.scss */
+    /* line 79, ../scss/_code.scss */
     .page-content div.literal-block-wrapper div.highlight {
       margin: 0; }
-  /* line 83, ../scss/_code.scss */
+  /* line 84, ../scss/_code.scss */
   .page-content .viewcode-link {
     float: right; }
-  /* line 87, ../scss/_code.scss */
+  /* line 88, ../scss/_code.scss */
   .page-content .viewcode-back {
     float: right;
     font-family: sans-serif; }
-  /* line 92, ../scss/_code.scss */
+  /* line 93, ../scss/_code.scss */
   .page-content div.viewcode-block:target {
     margin: -1px -10px;
     padding: 0 10px; }
-  /* line 99, ../scss/_code.scss */
+  /* line 100, ../scss/_code.scss */
   .page-content img.math {
     vertical-align: middle; }
-  /* line 103, ../scss/_code.scss */
+  /* line 104, ../scss/_code.scss */
   .page-content div.body div.math p {
     text-align: center; }
-  /* line 107, ../scss/_code.scss */
+  /* line 108, ../scss/_code.scss */
   .page-content span.eqno {
     float: right; }
   /* line 2, ../scss/_tables.scss */
@@ -10386,68 +10387,68 @@ a.headerlink {
   /* line 25, ../scss/_search.scss */
   .page-content ul.keywordmatches li.goodmatch a {
     font-weight: bold; }
-  /* line 171, ../scss/theme.scss */
+  /* line 173, ../scss/theme.scss */
   .page-content div.body p.caption {
     text-align: inherit; }
-  /* line 175, ../scss/theme.scss */
+  /* line 177, ../scss/theme.scss */
   .page-content div.body td {
     text-align: left; }
-  /* line 179, ../scss/theme.scss */
+  /* line 181, ../scss/theme.scss */
   .page-content p.rubric {
     margin-top: 30px;
     font-weight: bold; }
-  /* line 184, ../scss/theme.scss */
+  /* line 186, ../scss/theme.scss */
   .page-content div.topic {
     /* border: 1px solid #ccc;
     */
     padding: 1rem;
     margin: 10px 0 10px 0; }
-    /* line 191, ../scss/theme.scss */
+    /* line 193, ../scss/theme.scss */
     .page-content div.topic li {
       list-style-type: none; }
-  /* line 196, ../scss/theme.scss */
+  /* line 198, ../scss/theme.scss */
   .page-content p.topic-title {
     font-size: 1.1em;
     font-weight: bold;
     margin-top: 10px; }
-  /* line 202, ../scss/theme.scss */
+  /* line 204, ../scss/theme.scss */
   .page-content .optional {
     font-size: 1.3em; }
-  /* line 206, ../scss/theme.scss */
+  /* line 208, ../scss/theme.scss */
   .page-content .sig-paren {
     font-size: larger; }
-  /* line 210, ../scss/theme.scss */
+  /* line 212, ../scss/theme.scss */
   .page-content .versionmodified {
     font-style: italic; }
-  /* line 214, ../scss/theme.scss */
+  /* line 216, ../scss/theme.scss */
   .page-content .system-message {
     background-color: #fda;
     padding: 5px;
     border: 3px solid red; }
-  /* line 220, ../scss/theme.scss */
+  /* line 222, ../scss/theme.scss */
   .page-content .line-block {
     display: block;
     margin-top: 1em;
     margin-bottom: 1em; }
-  /* line 226, ../scss/theme.scss */
+  /* line 228, ../scss/theme.scss */
   .page-content .line-block .line-block {
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 1.5em; }
-  /* line 232, ../scss/theme.scss */
+  /* line 234, ../scss/theme.scss */
   .page-content .guilabel, .page-content .menuselection {
     font-family: sans-serif; }
-  /* line 236, ../scss/theme.scss */
+  /* line 238, ../scss/theme.scss */
   .page-content .accelerator {
     text-decoration: underline; }
-  /* line 240, ../scss/theme.scss */
+  /* line 242, ../scss/theme.scss */
   .page-content .classifier {
     font-style: oblique; }
-  /* line 244, ../scss/theme.scss */
+  /* line 246, ../scss/theme.scss */
   .page-content abbr, .page-content acronym {
     border-bottom: dotted 1px;
     cursor: help; }
-  /* line 249, ../scss/theme.scss */
+  /* line 251, ../scss/theme.scss */
   .page-content div.sidebar {
     margin: 0 0 0.5em 1em;
     border-radius: 4px;
@@ -10455,7 +10456,7 @@ a.headerlink {
     background-color: #ffe;
     width: 40%;
     float: right; }
-  /* line 260, ../scss/theme.scss */
+  /* line 262, ../scss/theme.scss */
   .page-content p.sidebar-title {
     font-weight: bold; }
 
