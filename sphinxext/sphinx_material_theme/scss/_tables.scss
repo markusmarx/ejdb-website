@@ -1,4 +1,11 @@
 
+table.hlist {
+  width: auto !important;
+  td {
+    vertical-align: baseline !important;
+  }
+}
+
 table.docutils {
   width: auto !important;
   border: 0;

@@ -74,6 +74,30 @@ Images
 Misc
 ----
 
+.. c:function:: PyObject* PyType_GenericAlloc(PyTypeObject *type, Py_ssize_t nitems)
+
+    Simple `C` function.
+
+.. envvar:: PATH
+
+.. productionlist::
+    try_stmt: try1_stmt | try2_stmt
+    try1_stmt: "try" ":" `suite`
+        : ("except" [`expression` ["," `target`]] ":" `suite`)+
+        : ["else" ":" `suite`]
+        : ["finally" ":" `suite`]
+    try2_stmt: "try" ":" `suite`
+        : "finally" ":" `suite`
+
+.. hlist::
+    :columns: 3
+
+    * A list of
+    * short items
+    * that should be
+    * displayed
+    * horizontally
+
 .. sidebar:: Sidebar Title
     :subtitle: Optional Sidebar Subtitle
 
@@ -165,6 +189,10 @@ The :program:`sphinx-quickstart` script has several options:
 .. option:: -h, --help, --version
 
    Display usage summary or Sphinx version.
+
+.. seealso::
+    `GNU tar manual, Basic Tar Format <http://link>`_
+    Documentation for tar archive files, including GNU tar extensions.
 
 
 
@@ -338,6 +366,13 @@ Lorem ipsum [Ref]_ dolor sit amet.
 
 .. _a link: http://example.com/
 
+
+
+.. glossary::
+    configuration directory
+        The definition of term
+
+
 .. rubric:: Footnotes
 
 .. [#] This is the usual layout.  However, :file:`conf.py` can also live in
@@ -345,3 +380,4 @@ Lorem ipsum [Ref]_ dolor sit amet.
 .. [#f1] Text of the first footnote.
 .. [#f2] Text of the second footnote.
 .. [Ref] Book or article reference, URL or whatever.
+

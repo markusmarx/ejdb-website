@@ -3,7 +3,7 @@ div.admonition {
   margin-bottom: 10px;
   padding: 7px;
 
-  &.note, &.warning, &.error {
+  &.note, &.warning, &.error, &.seealso {
     @extend .z-depth-1;
     border-radius: 4px;
   }

@@ -2619,7 +2619,7 @@ ul {
   clear: both; }
 
 /* line 62, ../scss/materialize/components/_global.scss */
-.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav, #page-content-block, .page-content div.admonition.note, .page-content div.admonition.warning, .page-content div.admonition.error, .page-content div.topic, .page-content div.sidebar {
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav, #page-content-block, .page-content div.admonition.note, .page-content div.admonition.warning, .page-content div.admonition.error, .page-content div.admonition.seealso, .page-content div.topic, .page-content div.sidebar {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
@@ -10053,8 +10053,7 @@ a.headerlink {
 /* line 115, ../scss/theme.scss */
 .toctree-wrapper > ul {
   margin: 0;
-  padding: 10px 0 10px 20px;
-  background-color: #f4f4f4; }
+  padding: 10px 0 10px 20px; }
 
 /* line 123, ../scss/theme.scss */
 #side-toc > ul {
@@ -10237,26 +10236,32 @@ a.headerlink {
   .page-content span.eqno {
     float: right; }
   /* line 2, ../scss/_tables.scss */
+  .page-content table.hlist {
+    width: auto !important; }
+    /* line 4, ../scss/_tables.scss */
+    .page-content table.hlist td {
+      vertical-align: baseline !important; }
+  /* line 9, ../scss/_tables.scss */
   .page-content table.docutils {
     width: auto !important;
     border: 0;
     border-collapse: collapse; }
-  /* line 8, ../scss/_tables.scss */
+  /* line 15, ../scss/_tables.scss */
   .page-content table caption {
     text-align: left;
     font-size: 1.5rem;
     line-height: 1.65rem;
     margin: 0.75rem 0 0.75rem 0; }
-  /* line 15, ../scss/_tables.scss */
+  /* line 22, ../scss/_tables.scss */
   .page-content table caption span.caption-number {
     font-style: italic; }
-  /* line 19, ../scss/_tables.scss */
+  /* line 26, ../scss/_tables.scss */
   .page-content table caption span.caption-text {
     font-weight: bold; }
-  /* line 31, ../scss/_tables.scss */
+  /* line 38, ../scss/_tables.scss */
   .page-content table.field-list td, .page-content table.field-list th {
     border: 0 !important; }
-  /* line 39, ../scss/_tables.scss */
+  /* line 46, ../scss/_tables.scss */
   .page-content table.footnote td, .page-content table.footnote th,
   .page-content table.citation td, .page-content table.citation th {
     border: 0 !important;
@@ -10265,7 +10270,7 @@ a.headerlink {
     border-left: 0;
     border-right: 0;
     border-bottom: 1px solid #aaa; }
-  /* line 50, ../scss/_tables.scss */
+  /* line 57, ../scss/_tables.scss */
   .page-content .footnote:target, .page-content .citation:target {
     background-color: #ffa; }
   /* line 1, ../scss/_admonitions.scss */
@@ -10274,7 +10279,7 @@ a.headerlink {
     margin-bottom: 10px;
     padding: 7px; }
     /* line 6, ../scss/_admonitions.scss */
-    .page-content div.admonition.note, .page-content div.admonition.warning, .page-content div.admonition.error {
+    .page-content div.admonition.note, .page-content div.admonition.warning, .page-content div.admonition.error, .page-content div.admonition.seealso {
       border-radius: 4px; }
     /* line 11, ../scss/_admonitions.scss */
     .page-content div.admonition.note {
