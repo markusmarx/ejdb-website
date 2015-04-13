@@ -21,8 +21,8 @@ Prerequsties
 
 * Install Linux x64 OS (tested on debian/ubuntu)
 * Install all these packages:
-   
- ::
+
+::
 
     autoconf automake bash bison bzip2 cmake
     flex gcc intltool libtool make openssl
@@ -34,20 +34,20 @@ Creating build environment
 
 You need to checkout specific branch of `MXE cross build environment <http://mxe.cc/>`_ to build win32 and win64 binaries:
 
- ::
+::
 
     git clone https://github.com/mxe/mxe.git
 
 Then create MXE settings file:
 
- ::
+::
 
     cd <mx checkout dir>
     nano ./settings.mk
 
 And enter the following settings into `./settings.mk`:
 
- ::
+::
 
     JOBS := 1
     MXE_TARGETS := x86_64-w64-mingw32 i686-w64-mingw32
@@ -58,7 +58,7 @@ And enter the following settings into `./settings.mk`:
 
 Then make MXE build env:
 
- ::
+::
 
     cd <mx checkout dir>
     make
@@ -66,26 +66,26 @@ Then make MXE build env:
 Building EJDB and TokyoCabinet
 ------------------------------
 
- ::
+::
 
     git clone https://github.com/Softmotions/ejdb.git
     cd ejdb
 
 To make win build we have to run this script: `tcejdb/mxe/mxe-build.sh`
 
- ::
+::
 
     mxe-build.sh <mxe home path> w32|w64 [optional ./configure options]
 
 Example: building win32 binaries + EJDB test cases
 
- ::
+::
 
     tcejdb/mxe/mxe-build.sh ${HOME}/mxe w32 "--enable-tests"
 
 Example: building win64 binaries:
 
- ::
+::
 
     tcejdb/mxe/mxe-build.sh ${HOME}/mxe w64
 
@@ -127,7 +127,7 @@ Installation on Debian/Ubuntu
 
 **Packages:**
 
- ::
+::
 
     libtcejdb9 - Embedded JSON Database engine [runtime]
     libtcejdb9-dbg - Embedded JSON Database engine [runtime]
@@ -137,7 +137,7 @@ Installation on Debian/Ubuntu
 
 **Ubuntu installation:**
 
- ::
+::
 
     sudo add-apt-repository ppa:adamansky/ejdb
     sudo apt-get update
@@ -151,7 +151,7 @@ Your own debian packages
 
 You can build custom debian packages for your debian based system by invoking
 
- ::
+::
 
     make deb-packages
     or
@@ -163,7 +163,7 @@ EJDB CLI
 
 In order to use `EJDB CLI <https://github.com/Softmotions/ejdb/wiki/EJDB-Command-line-interface>`_ or `EJDB NodeJS binding <https://github.com/Softmotions/ejdb-node>`_ you still have to install the *nodejs* and *npm* (`https://launchpad.net/~chris-lea/+archive/node.js/ <https://launchpad.net/~chris-lea/+archive/ubuntu/node.js>`_)
 
- ::    
+::
 
     npm install -g ejdb
 
@@ -188,7 +188,7 @@ Prerequisites
 Build and install
 ##################
 
- ::
+::
 
    cd ./tcejdb
    ./configure --prefix=<installation prefix> && make && make check

@@ -8,10 +8,21 @@ window.DOCUMENTATION_OPTIONS = {
 
 jQuery(function() {
 
+    initCSS();
     initMaterialize();
     initTopNav();
     initSideNav();
 
+
+    function initCSS() {
+        $("table.docutils").each(function() {
+            var $this = $(this);
+            if (!$this.hasClass("footnote") &&
+                    !$this.hasClass("citation")) { //skip footnote/citation tables
+                $this.addClass("bordered hoverable");
+            }
+        });
+    }
 
     function initMaterialize() {
         $(".button-collapse").sideNav();
