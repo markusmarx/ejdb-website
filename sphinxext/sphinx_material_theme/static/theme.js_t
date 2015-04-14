@@ -28,6 +28,7 @@ jQuery(function() {
         $(".button-collapse").sideNav();
         $(".dropdown-button").dropdown({'hover' : false});
         $("select").not(".disabled").material_select();
+        //$("#toc-wrapper").pushpin({ top: 30 });
     }
 
     function initTopNav() {
@@ -41,7 +42,7 @@ jQuery(function() {
     }
 
     function initSideNav() {
-        var res = $("#side-toc");
+        var res = $("#sidetoc");
         var tlfirst = false;
         res.find("> ul > li").each(function() {
             var $this = $(this);
@@ -76,11 +77,12 @@ jQuery(function() {
         });
         res = res.find("> ul");
 
+        var sidebar = $("#sidebar");
         var pageContent = $("#page-content-block");
-        if (res.length) {
-            pageContent.css({"min-height" : res.height() + "px"});
-            new ResizeSensor(res[0], function() {
-                pageContent.css({"min-height" : (window.innerWidth <= 601 ? 0 : res.height()) + "px"});
+        if (sidebar.length) {
+            pageContent.css({"min-height" : sidebar.height() + "px"});
+            new ResizeSensor(sidebar[0], function() {
+                pageContent.css({"min-height" : (window.innerWidth <= 601 ? 0 : sidebar.height()) + "px"});
             });
         } else {
             pageContent.css({"min-height" : 0 + "px"});

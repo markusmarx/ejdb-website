@@ -46,16 +46,6 @@ p {
   margin: 0.8em 0 0.5em 0;
 }
 
-nav {
-  ul {
-    li {
-      &:hover, &.active {
-        background-color: #0197D8;
-      }
-    }
-  }
-}
-
 pre {
   overflow: auto;
   overflow-y: hidden;
@@ -118,7 +108,21 @@ a.headerlink {
   //background-color: #f4f4f4;
 }
 
-#side-toc {
+#nav {
+  background-color: #212121;
+  ul {
+    li {
+      &:hover, &.active {
+        background-color: #0197D8;
+      }
+    }
+  }
+  .nav-wrapper {
+    padding: 0 1rem;
+  }
+}
+
+#sidetoc {
 
   > ul {
     margin-top: 0;
@@ -155,7 +159,6 @@ a.headerlink {
   @extend .z-depth-1;
   background-color: #fff;
   padding: 10px 15px 15px 15px;
-  margin: 0 10px 15px 15px;
 
   .section {
     padding-top: 0;
@@ -262,7 +265,65 @@ a.headerlink {
   p.sidebar-title {
     font-weight: bold;
   }
+
+  .rel-nav {
+    float: right;
+    .btn {
+      padding: 0 1rem;
+    }
+  }
 }
 
-@import "media";
+/*----------------- Media mods -----------------------*/
+
+@media #{$small-and-down} {
+  nav img {
+    margin-top: 3px;
+  }
+
+  #sidetoc {
+    > ul {
+      margin-bottom: 20px;
+    }
+  }
+
+  #page-content-block.page-content {
+    margin: 0;
+  }
+}
+
+@media #{$medium-and-up} {
+
+  nav img {
+    margin-top: 7px;
+  }
+  #sidetoc {
+    > ul {
+      margin-bottom: 0;
+    }
+  }
+  #page-content-block.page-content {
+    margin: 0 10px 15px 15px;
+  }
+}
+
+@media #{$large-and-up} {
+
+}
+
+@media print {
+  div.document,
+  div.documentwrapper,
+  div.bodywrapper {
+    margin: 0 !important;
+    width: 100%;
+  }
+
+  div.sphinxsidebar,
+  div.related,
+  div.footer,
+  #top-link {
+    display: none;
+  }
+}
 

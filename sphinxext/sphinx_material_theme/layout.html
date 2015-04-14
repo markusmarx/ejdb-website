@@ -16,7 +16,7 @@
 
 {%- macro css() %}
 <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css"/>
-<link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+<link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css"/>
 {%- for cssfile in css_files %}
 <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css"/>
 {%- endfor %}
@@ -35,45 +35,61 @@
 <body role="document">
 {%- block topnav_popups %}
 {%- endblock %}
-<header>
-    <nav id="nav" class="grey darken-4">
-        <div class="container">
-            <div class="nav-wrapper">
-                {%- if logo %}
-                <a href="{{ pathto(master_doc) }}">
-                    <img class="brand-logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
-                </a>
-                {%- endif %}
-                <a href="#" data-activates="nav-mobile-sidebar" class="button-collapse"><i
-                        class="mdi-navigation-menu"></i></a>
-                <ul class="right hide-on-med-and-down">
-                    {%- block topnav_li_items %}
-                    {%- for n, l in theme_top_nav_links %}
-                    <li><a href="{{ pathto(l, 1) }}">{{ n }}</a></li>
-                    {%- endfor %}
-                    {%- endblock %}
-                </ul>
-                <ul class="side-nav" id="nav-mobile-sidebar">
-                    {{ self.topnav_li_items() }}
-                </ul>
-            </div>
+<header style="margin-bottom: 20px">
+    <nav id="nav">
+        <div class="nav-wrapper">
+            {%- if logo %}
+            <a href="{{ pathto(master_doc) }}">
+                <img class="brand-logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
+            </a>
+            {%- endif %}
+            <a href="#" data-activates="nav-mobile-sidebar" class="button-collapse"><i
+                    class="mdi-navigation-menu"></i></a>
+            <ul class="right hide-on-med-and-down">
+                {%- block topnav_li_items %}
+                {%- for n, l in theme_top_nav_links %}
+                <li><a href="{{ pathto(l, 1) }}">{{ n }}</a></li>
+                {%- endfor %}
+                {%- endblock %}
+            </ul>
+            <ul class="side-nav" id="nav-mobile-sidebar">
+                {{ self.topnav_li_items() }}
+            </ul>
         </div>
     </nav>
 </header>
 
-<div class="row white z-depth-1" id="relbar">
+<!--<div class="row white z-depth-1" id="relbar">
     &nbsp; {# todo #}
-</div>
+</div>-->
+
 <div class="row">
-    <div class="page-content-wrapper col s12 m8 l9">
+    <div id="sidebar" class="col s12 m4 l3 push-m8 push-l9">
+        <div id="toc-wrapper">
+            <div class="row" style="margin: 0">
+                <form class="col s12 no-padding">
+                    <div class="input-field">
+                        <input id="search" type="search" required>
+                        <label for="search" class="">Quick search</label>
+                    </div>
+                </form>
+            </div>
+            <div id="sidetoc">
+                {{ toctree(maxdepth=2, collapse=False, includehidden=True) }}
+            </div>
+        </div>
+    </div>
+    <div class="page-content-wrapper col s12 m8 l9 pull-m4 pull-l3">
         <div id="page-content-block" class="page-content">
             {{ body }}
+            <div class="rel-nav">
+                <a class="waves-effect waves-light btn">Prev</a>
+                <a class="waves-effect waves-light btn"><i class="mdi-action-home"></i></a>
+                <a class="waves-effect waves-light btn">Next</a>
+            </div>
         </div>
         <div id="page-content-footer">
         </div>
-    </div>
-    <div id="side-toc" class="col s12 m4 l3">
-        {{ toctree(maxdepth=2, collapse=False, includehidden=True) }}
     </div>
 </div>
 
@@ -108,7 +124,7 @@
         <div class="container">
             {%- if hasdoc('copyright') %}
             {%- trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a class="orange-text text-lighten-3"
-                                                                                 href="{{ path }}">Copyright</a> {{
+                                                                                  href="{{ path }}">Copyright</a> {{
             copyright }}.{%- endtrans %}
             {%- else %}
             {%- trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{%- endtrans %}
