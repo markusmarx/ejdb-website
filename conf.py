@@ -139,6 +139,7 @@ html_theme_options = {
 
 html_sidebars = {
     '**': [
+        'searchbox.html',
         'globaltoc.html'
     ]
 }

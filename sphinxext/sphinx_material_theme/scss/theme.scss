@@ -108,6 +108,14 @@ a.headerlink {
   //background-color: #f4f4f4;
 }
 
+.rel-nav {
+  float: right;
+  .btn {
+    padding: 0 1rem;
+    background-color: #009BDF;
+  }
+}
+
 #nav {
   background-color: #212121;
   ul {
@@ -149,6 +157,10 @@ a.headerlink {
   }
 }
 
+#page-content-block {
+  padding-bottom: 42px;
+}
+
 .page-content-wrapper {
   padding: 0;
   margin: 0;
@@ -159,6 +171,8 @@ a.headerlink {
   @extend .z-depth-1;
   background-color: #fff;
   padding: 10px 15px 15px 15px;
+  overflow: auto;
+  position: relative;
 
   .section {
     padding-top: 0;
@@ -265,14 +279,9 @@ a.headerlink {
   p.sidebar-title {
     font-weight: bold;
   }
-
-  .rel-nav {
-    float: right;
-    .btn {
-      padding: 0 1rem;
-    }
-  }
 }
+
+
 
 /*----------------- Media mods -----------------------*/
 
@@ -290,6 +299,10 @@ a.headerlink {
   #page-content-block.page-content {
     margin: 0;
   }
+
+  #bottom-rel-placeholder > .rel-nav {
+    margin: -45px 10px 0 0;
+  }
 }
 
 @media #{$medium-and-up} {
@@ -297,13 +310,19 @@ a.headerlink {
   nav img {
     margin-top: 7px;
   }
+
   #sidetoc {
     > ul {
       margin-bottom: 0;
     }
   }
+
   #page-content-block.page-content {
     margin: 0 10px 15px 15px;
+  }
+
+  #bottom-rel-placeholder > .rel-nav {
+    margin: -60px 25px 0 0;
   }
 }
 

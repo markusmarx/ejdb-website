@@ -59,36 +59,35 @@
     </nav>
 </header>
 
-<!--<div class="row white z-depth-1" id="relbar">
-    &nbsp; {# todo #}
-</div>-->
-
 <div class="row">
     <div id="sidebar" class="col s12 m4 l3 push-m8 push-l9">
-        <div id="toc-wrapper">
-            <div class="row" style="margin: 0">
-                <form class="col s12 no-padding">
-                    <div class="input-field">
-                        <input id="search" type="search" required>
-                        <label for="search" class="">Quick search</label>
-                    </div>
-                </form>
-            </div>
-            <div id="sidetoc">
-                {{ toctree(maxdepth=2, collapse=False, includehidden=True) }}
-            </div>
-        </div>
+        {%- for sidebartemplate in sidebars %}
+        {%- include sidebartemplate %}
+        {%- endfor %}
     </div>
     <div class="page-content-wrapper col s12 m8 l9 pull-m4 pull-l3">
         <div id="page-content-block" class="page-content">
-            {{ body }}
+            {%- block relnav %}
             <div class="rel-nav">
-                <a class="waves-effect waves-light btn">Prev</a>
-                <a class="waves-effect waves-light btn"><i class="mdi-action-home"></i></a>
-                <a class="waves-effect waves-light btn">Next</a>
+                {%- for rellink in rellinks %}
+                <a href="{{ pathto(rellink[0]) }}"
+                   title="{{ rellink[1]|striptags|e }}"
+                   class="waves-effect waves-light btn">{{ rellink[3] }}</a>
+                {%- endfor %}
+                {%- block rootrellink %}
+                <a href="{{ pathto(master_doc) }}"
+                   title="{{ shorttitle|e }}"
+                   class="waves-effect waves-light btn"><i class="mdi-action-home"></i></a>
+                {%- endblock %}
+                {%- block relbaritems %} {% endblock %}
             </div>
+            {%- endblock %}
+            {{ body }}
         </div>
         <div id="page-content-footer">
+            <div id="bottom-rel-placeholder" style="display:none">
+                {{ self.relnav() }}
+            </div>
         </div>
     </div>
 </div>
@@ -99,7 +98,7 @@
         <div class="row">
             <div class="col l6 s12">
                 {%- block page_footer_left %}
-                <h5 class="white-text">Company Bio</h5>
+                <h5 class="white-text">Company Info</h5>
 
                 <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's
                     our full time job. Any amount would help support and continue development on this project and is
