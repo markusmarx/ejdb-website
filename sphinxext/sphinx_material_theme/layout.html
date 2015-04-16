@@ -1,5 +1,6 @@
 {%- block doctype %}<!DOCTYPE html>{%- endblock %}
 
+{%- set is_master = (master_doc + ".txt") == sourcename %}
 {%- set script_files = script_files + ['_static/materialize.min.js', '_static/theme.js'] %}
 {%- if not embedded and docstitle %}
 {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
@@ -111,14 +112,18 @@
             {%- macro relnav(navId) %}
             <div class="rel-nav">
                 {%- block rootrellink %}
+                {%- if not is_master %}
                 <a href="{{ pathto(master_doc) }}"
                    title="{{ shorttitle|e }}"
                    class="waves-effect waves-light btn"><i class="mdi-action-home"></i></a>
+                {%- endif %}
                 {%- endblock %}
                 {%- block tocrellink %}
+                {%- if display_toc %}
                 <a href="#toc-modal"
                    title="{{ shorttitle|e }}"
                    class="modal-trigger waves-effect waves-light btn"><i class="mts-list-1"></i></a>
+                {%- endif %}
                 {%- endblock %}
                 {%- if parents %}
                 <a class="dropdown-button btn" href="#"
@@ -136,9 +141,9 @@
                 <a href="{{ pathto(rellink[0]) }}"
                    title="{{ rellink[1]|striptags|e }}"
                    class="waves-effect waves-light btn">
-                    {%- if rellink[3] == "next" %}
+                    {%- if rellink[2] == "N" %}
                     <i class="mts-right"></i>
-                    {%- elif rellink[3] == "previous" %}
+                    {%- elif rellink[2] == "P" %}
                     <i class="mts-left"></i>
                     {%- else %}
                     {{ rellink[3] }}
