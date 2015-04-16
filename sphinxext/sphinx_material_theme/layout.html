@@ -59,7 +59,6 @@
     {%- block extrahead %} {% endblock %}
 </head>
 <body role="document">
-
 <div id="toc-modal" class="modal modal-fixed-footer">
     <div class="modal-content">
         <h4>{{ _('Table Of Contents') }}</h4>
@@ -72,7 +71,6 @@
         <a href="#!" class="modal-action modal-close waves-effect btn-flat ">Close</a>
     </div>
 </div>
-
 {%- block topnav_popups %}
 {%- endblock %}
 <header style="margin-bottom: 20px">
@@ -164,7 +162,6 @@
         </div>
     </div>
 </div>
-
 {%- block footer %}
 <footer class="page-footer grey darken-4">
     <div class="container">
@@ -206,7 +203,6 @@
     {%- endif %}
 </footer>
 {%- endblock %}
-
 {%- if not embedded %}
 {{ script() }}
 {%- block extrascript %} {% endblock %}
