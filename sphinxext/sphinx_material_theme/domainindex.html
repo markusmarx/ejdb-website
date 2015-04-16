@@ -9,7 +9,7 @@
 #}
 {%- extends "layout.html" %}
 {% set title = indextitle %}
-{% block extrahead %}
+{% block extrascript %}
 {{ super() }}
 {% if not embedded and collapse_index %}
     <script type="text/javascript">

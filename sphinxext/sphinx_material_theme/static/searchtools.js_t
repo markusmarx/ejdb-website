@@ -121,7 +121,9 @@ var Search = {
     this.status = $('<p style="display: none"></p>').appendTo(this.out);
     this.output = $('<ul class="search"/>').appendTo(this.out);
 
-    $('#search-progress').text(_('Preparing search...'));
+    var sp = $('#search-progress');
+    sp.text(_('Preparing search...'));
+    sp.show();
     this.startPulse();
 
     // index already loaded, the browser was quick!
@@ -183,7 +185,9 @@ var Search = {
 
     // array of [filename, title, anchor, descr, score]
     var results = [];
-    $('#search-progress').empty();
+    var sp = $('#search-progress');
+    sp.empty();
+    sp.hide();
 
     // lookup as object
     for (i = 0; i < objectterms.length; i++) {

@@ -1,6 +1,6 @@
 {%- block doctype %}<!DOCTYPE html>{%- endblock %}
 
-{%- set script_files = script_files + ['_static/materialize.js', '_static/rs.js', '_static/theme.js'] %}
+{%- set script_files = script_files + ['_static/materialize.min.js', '_static/theme.js'] %}
 {%- if not embedded and docstitle %}
 {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
 {%- else %}
@@ -58,6 +58,20 @@
     {%- block extrahead %} {% endblock %}
 </head>
 <body role="document">
+
+<div id="toc-modal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>{{ _('Table Of Contents') }}</h4>
+
+        <div class="page-content">
+            {{ toc }}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect btn-flat ">Close</a>
+    </div>
+</div>
+
 {%- block topnav_popups %}
 {%- endblock %}
 <header style="margin-bottom: 20px">
@@ -83,12 +97,14 @@
         </div>
     </nav>
 </header>
-
 <div class="row">
     <div id="sidebar" class="col s12 m4 l3 push-m8 push-l9">
         {%- for sidebartemplate in sidebars %}
         {%- include sidebartemplate %}
         {%- endfor %}
+        {%- if sidebars|length == 0 %}
+        &nbsp;
+        {%- endif %}
     </div>
     <div class="page-content-wrapper col s12 m8 l9 pull-m4 pull-l3">
         <div id="page-content-block">
@@ -100,9 +116,9 @@
                    class="waves-effect waves-light btn"><i class="mdi-action-home"></i></a>
                 {%- endblock %}
                 {%- block tocrellink %}
-                <a href="#"
+                <a href="#toc-modal"
                    title="{{ shorttitle|e }}"
-                   class="waves-effect waves-light btn"><i class="mts-list-1"></i></a>
+                   class="modal-trigger waves-effect waves-light btn"><i class="mts-list-1"></i></a>
                 {%- endblock %}
                 {%- if parents %}
                 <a class="dropdown-button btn" href="#"
@@ -120,14 +136,20 @@
                 <a href="{{ pathto(rellink[0]) }}"
                    title="{{ rellink[1]|striptags|e }}"
                    class="waves-effect waves-light btn">
+                    {%- if rellink[3] == "next" %}
+                    <i class="mts-right"></i>
+                    {%- elif rellink[3] == "previous" %}
+                    <i class="mts-left"></i>
+                    {%- else %}
                     {{ rellink[3] }}
+                    {%- endif %}
                 </a>
                 {%- endfor %}
             </div>
             {%- endmacro %}
             {{ relnav(1) }}
             <div class="page-content">
-                {{ body }}
+            {% block body %}{% endblock %}
             </div>
         </div>
         <div id="page-content-footer">
@@ -182,6 +204,7 @@
 
 {%- if not embedded %}
 {{ script() }}
+{%- block extrascript %} {% endblock %}
 {%- endif %}
 </body>
 </html>

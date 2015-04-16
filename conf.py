@@ -141,6 +141,10 @@ html_sidebars = {
     '**': [
         'searchbox.html',
         'globaltoc.html'
+    ],
+
+    'search': [
+        'searchbox.html'
     ]
 }
 
