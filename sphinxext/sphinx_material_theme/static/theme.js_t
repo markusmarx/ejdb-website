@@ -128,7 +128,7 @@ jQuery(function() {
 
     function initMaterialize() {
         $(".button-collapse").sideNav();
-        $(".dropdown-button").dropdown({'hover' : false});
+        $(".dropdown-button").dropdown({"hover" : false});
         $("select").not(".disabled").material_select();
     }
 

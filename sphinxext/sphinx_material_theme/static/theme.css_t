@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* line 378, ../scss/materialize/components/_color.scss */
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important; }
@@ -2619,7 +2620,7 @@ ul {
   clear: both; }
 
 /* line 62, ../scss/materialize/components/_global.scss */
-.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav, .page-content, .page-content pre, .page-content div.admonition.note, .page-content div.admonition.warning, .page-content div.admonition.error, .page-content div.admonition.seealso, .page-content div.topic, .page-content div.sidebar {
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav, #page-content-block, .page-content pre, .page-content div.admonition.note, .page-content div.admonition.warning, .page-content div.admonition.error, .page-content div.admonition.seealso, .page-content div.topic, .page-content div.sidebar {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
@@ -10195,24 +10196,93 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   /* line 122, ../scss/materialize/components/date_picker/_default.time.scss */
   .picker--time .picker__box {
     margin-bottom: 5em; } }
-/* line 37, ../scss/theme.scss */
+@font-face {
+  font-family: 'mt-sphinx';
+  src: url("font/mt-sphinx/mt-sphinx.eot?6647303");
+  src: url("font/mt-sphinx/mt-sphinx.eot?6647303#iefix") format("embedded-opentype"), url("font/mt-sphinx/mt-sphinx.woff?6647303") format("woff"), url("font/mt-sphinx/mt-sphinx.ttf?6647303") format("truetype"), url("font/mt-sphinx/mt-sphinx.svg?6647303#mt-sphinx") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'mt-sphinx';
+    src: url('font/mt-sphinx/mt-sphinx.svg?6647303#mt-sphinx') format('svg');
+  }
+}
+*/
+/* line 22, ../scss/_fonts.scss */
+[class^="mts-"]:before, [class*=" mts-"]:before {
+  font-family: "mt-sphinx";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
+
+/* line 57, ../scss/_fonts.scss */
+.mts-up:before {
+  content: '\e800'; }
+
+/* '' */
+/* line 58, ../scss/_fonts.scss */
+.mts-down:before {
+  content: '\e801'; }
+
+/* '' */
+/* line 59, ../scss/_fonts.scss */
+.mts-left:before {
+  content: '\e803'; }
+
+/* '' */
+/* line 60, ../scss/_fonts.scss */
+.mts-right:before {
+  content: '\e804'; }
+
+/* '' */
+/* line 61, ../scss/_fonts.scss */
+.mts-list-1:before {
+  content: '\e805'; }
+
+/* '' */
+/* line 39, ../scss/theme.scss */
 body {
   background-color: #f4f4f4; }
 
-/* line 41, ../scss/theme.scss */
+/* line 43, ../scss/theme.scss */
 div.clearer {
   clear: both; }
 
-/* line 45, ../scss/theme.scss */
+/* line 47, ../scss/theme.scss */
 p {
   margin: 0.8em 0 0.5em 0; }
 
-/* line 49, ../scss/theme.scss */
+/* line 51, ../scss/theme.scss */
 pre {
   overflow: auto;
   overflow-y: hidden; }
 
-/* line 54, ../scss/theme.scss */
+/* line 56, ../scss/theme.scss */
 h1:hover > a.headerlink,
 h2:hover > a.headerlink,
 h3:hover > a.headerlink,
@@ -10225,101 +10295,100 @@ p.caption:hover > a.headerlink,
 div.code-block-caption:hover > a.headerlink {
   visibility: visible; }
 
-/* line 67, ../scss/theme.scss */
+/* line 69, ../scss/theme.scss */
 .align-left {
   text-align: left; }
 
-/* line 71, ../scss/theme.scss */
+/* line 73, ../scss/theme.scss */
 .align-center {
   text-align: center; }
 
-/* line 75, ../scss/theme.scss */
+/* line 77, ../scss/theme.scss */
 .align-right {
   text-align: right; }
 
-/* line 79, ../scss/theme.scss */
+/* line 81, ../scss/theme.scss */
 .first {
   margin-top: 0 !important; }
 
-/* line 83, ../scss/theme.scss */
+/* line 85, ../scss/theme.scss */
 img.align-left, .figure.align-left, object.align-left {
   clear: left;
   float: left;
   margin-right: 1em; }
 
-/* line 89, ../scss/theme.scss */
+/* line 91, ../scss/theme.scss */
 img.align-right, .figure.align-right, object.align-right {
   clear: right;
   float: right;
   margin-left: 1em; }
 
-/* line 95, ../scss/theme.scss */
+/* line 97, ../scss/theme.scss */
 img.align-center, .figure.align-center, object.align-center {
   display: block;
   margin-left: auto;
   margin-right: auto; }
 
-/* line 101, ../scss/theme.scss */
+/* line 103, ../scss/theme.scss */
 a.headerlink {
   visibility: hidden; }
 
-/* line 105, ../scss/theme.scss */
+/* line 107, ../scss/theme.scss */
 .toctree-wrapper > ul {
   margin: 0;
   padding: 10px 0 10px 20px; }
 
-/* line 111, ../scss/theme.scss */
+/* line 113, ../scss/theme.scss */
 .rel-nav {
   float: right; }
-  /* line 113, ../scss/theme.scss */
+  /* line 115, ../scss/theme.scss */
   .rel-nav .btn, .rel-nav .btn-large {
     padding: 0 1rem;
     background-color: #009BDF; }
 
-/* line 119, ../scss/theme.scss */
+/* line 121, ../scss/theme.scss */
 #nav {
   background-color: #212121; }
-  /* line 123, ../scss/theme.scss */
+  /* line 125, ../scss/theme.scss */
   #nav ul li:hover, #nav ul li.active {
     background-color: #0197D8; }
-  /* line 128, ../scss/theme.scss */
+  /* line 130, ../scss/theme.scss */
   #nav .nav-wrapper {
     padding: 0 1rem; }
 
-/* line 135, ../scss/theme.scss */
+/* line 137, ../scss/theme.scss */
 #sidetoc > ul {
   margin-top: 0; }
-/* line 139, ../scss/theme.scss */
+/* line 141, ../scss/theme.scss */
 #sidetoc .collapsible-header.active {
   margin-bottom: 5px; }
-/* line 143, ../scss/theme.scss */
+/* line 145, ../scss/theme.scss */
 #sidetoc .mt-first {
   margin-top: 5px; }
-/* line 147, ../scss/theme.scss */
+/* line 149, ../scss/theme.scss */
 #sidetoc ul.collapsible-body {
   padding-bottom: 1rem; }
-/* line 151, ../scss/theme.scss */
+/* line 153, ../scss/theme.scss */
 #sidetoc ul.collapsible-body li, #sidetoc .mt-toclink {
   padding: 0 1rem; }
-/* line 155, ../scss/theme.scss */
+/* line 157, ../scss/theme.scss */
 #sidetoc a.current {
   font-weight: bold; }
 
-/* line 160, ../scss/theme.scss */
+/* line 162, ../scss/theme.scss */
 #page-content-block {
-  padding-bottom: 42px; }
+  background-color: #fff;
+  padding: 10px 15px 42px 15px;
+  overflow: auto;
+  position: relative; }
 
-/* line 164, ../scss/theme.scss */
+/* line 170, ../scss/theme.scss */
 .page-content-wrapper {
   padding: 0;
   margin: 0; }
 
-/* line 169, ../scss/theme.scss */
+/* line 175, ../scss/theme.scss */
 .page-content {
-  background-color: #fff;
-  padding: 10px 15px 15px 15px;
-  overflow: auto;
-  position: relative;
   /* -- math display ---------------------------------------------------------- */
   /*table.docutils. td, table.docutils th {
     padding: 1px 8px 1px 5px;
@@ -10708,12 +10777,12 @@ a.headerlink {
     margin-bottom: 20px; }
 
   /* line 299, ../scss/theme.scss */
-  #page-content-block.page-content {
+  #page-content-block {
     margin: 0; }
 
   /* line 303, ../scss/theme.scss */
   #bottom-rel-placeholder > .rel-nav {
-    margin: -45px 10px 0 0; } }
+    margin: -45px 14px 0 0; } }
 @media only screen and (min-width: 601px) {
   /* line 310, ../scss/theme.scss */
   nav img {
@@ -10724,7 +10793,7 @@ a.headerlink {
     margin-bottom: 0; }
 
   /* line 320, ../scss/theme.scss */
-  #page-content-block.page-content {
+  #page-content-block {
     margin: 0 10px 15px 15px; }
 
   /* line 324, ../scss/theme.scss */

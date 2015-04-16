@@ -31,6 +31,31 @@
     <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
     {%- endblock %}
     {{ css() }}
+    {%- block linktags %}
+    {%- if hasdoc('about') %}
+    <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}"/>
+    {%- endif %}
+    {%- if hasdoc('genindex') %}
+    <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}"/>
+    {%- endif %}
+    {%- if hasdoc('search') %}
+    <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}"/>
+    {%- endif %}
+    {%- if hasdoc('copyright') %}
+    <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}"/>
+    {%- endif %}
+    <link rel="top" title="{{ docstitle|e }}" href="{{ pathto(master_doc) }}"/>
+    {%- if parents %}
+    <link rel="up" title="{{ parents[-1].title|striptags|e }}" href="{{ parents[-1].link|e }}"/>
+    {%- endif %}
+    {%- if next %}
+    <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}"/>
+    {%- endif %}
+    {%- if prev %}
+    <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}"/>
+    {%- endif %}
+    {%- endblock %}
+    {%- block extrahead %} {% endblock %}
 </head>
 <body role="document">
 {%- block topnav_popups %}
@@ -66,23 +91,36 @@
         {%- endfor %}
     </div>
     <div class="page-content-wrapper col s12 m8 l9 pull-m4 pull-l3">
-        <div id="page-content-block" class="page-content">
+        <div id="page-content-block">
             {%- block relnav %}
             <div class="rel-nav">
-                {%- for rellink in rellinks %}
-                <a href="{{ pathto(rellink[0]) }}"
-                   title="{{ rellink[1]|striptags|e }}"
-                   class="waves-effect waves-light btn">{{ rellink[3] }}</a>
-                {%- endfor %}
                 {%- block rootrellink %}
                 <a href="{{ pathto(master_doc) }}"
                    title="{{ shorttitle|e }}"
                    class="waves-effect waves-light btn"><i class="mdi-action-home"></i></a>
                 {%- endblock %}
+                {%- if parents %}
+                <a class="dropdown-button btn" href="#"
+                   data-beloworigin="true"
+                   data-activates="dropdown1"><i class="mts-up"></i></a>
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!">one</a></li>
+                    <li><a href="#!">two</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#!">three</a></li>
+                </ul>
+                {%- endif %}
                 {%- block relbaritems %} {% endblock %}
+                {%- for rellink in rellinks|reverse %}
+                <a href="{{ pathto(rellink[0]) }}"
+                   title="{{ rellink[1]|striptags|e }}"
+                   class="waves-effect waves-light btn">{{ rellink[3] }}</a>
+                {%- endfor %}
             </div>
             {%- endblock %}
-            {{ body }}
+            <div class="page-content">
+                {{ body }}
+            </div>
         </div>
         <div id="page-content-footer">
             <div id="bottom-rel-placeholder" style="display:none">

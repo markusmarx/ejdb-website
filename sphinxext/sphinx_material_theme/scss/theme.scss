@@ -34,6 +34,8 @@
 @import "materialize/components/date_picker/default.date.scss";
 @import "materialize/components/date_picker/default.time.scss";
 
+@import "fonts";
+
 body {
   background-color: #f4f4f4;
 }
@@ -158,7 +160,11 @@ a.headerlink {
 }
 
 #page-content-block {
-  padding-bottom: 42px;
+  @extend .z-depth-1;
+  background-color: #fff;
+  padding: 10px 15px 42px 15px;
+  overflow: auto;
+  position: relative;
 }
 
 .page-content-wrapper {
@@ -167,12 +173,6 @@ a.headerlink {
 }
 
 .page-content {
-
-  @extend .z-depth-1;
-  background-color: #fff;
-  padding: 10px 15px 15px 15px;
-  overflow: auto;
-  position: relative;
 
   .section {
     padding-top: 0;
@@ -296,12 +296,12 @@ a.headerlink {
     }
   }
 
-  #page-content-block.page-content {
+  #page-content-block {
     margin: 0;
   }
 
   #bottom-rel-placeholder > .rel-nav {
-    margin: -45px 10px 0 0;
+    margin: -45px 14px 0 0;
   }
 }
 
@@ -317,7 +317,7 @@ a.headerlink {
     }
   }
 
-  #page-content-block.page-content {
+  #page-content-block {
     margin: 0 10px 15px 15px;
   }
 
