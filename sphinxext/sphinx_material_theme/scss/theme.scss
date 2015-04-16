@@ -33,7 +33,6 @@
 @import "materialize/components/date_picker/default.scss";
 @import "materialize/components/date_picker/default.date.scss";
 @import "materialize/components/date_picker/default.time.scss";
-
 @import "fonts";
 
 body {
@@ -118,6 +117,10 @@ a.headerlink {
   }
 }
 
+.dropdown-content a {
+  color: #0197D8 !important;
+}
+
 #nav {
   background-color: #212121;
   ul {
@@ -163,7 +166,7 @@ a.headerlink {
   @extend .z-depth-1;
   background-color: #fff;
   padding: 10px 15px 42px 15px;
-  overflow: auto;
+  //overflow: auto;
   position: relative;
 }
 
@@ -280,8 +283,6 @@ a.headerlink {
     font-weight: bold;
   }
 }
-
-
 
 /*----------------- Media mods -----------------------*/
 

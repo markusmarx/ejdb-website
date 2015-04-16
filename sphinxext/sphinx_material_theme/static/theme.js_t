@@ -101,7 +101,6 @@ window.DOCUMENTATION_OPTIONS = {
                 process();
                 return true;
             }
-            ;
             return false;
         }
     });
@@ -128,7 +127,11 @@ jQuery(function() {
 
     function initMaterialize() {
         $(".button-collapse").sideNav();
-        $(".dropdown-button").dropdown({"hover" : false});
+        $(".dropdown-button").dropdown(
+                {
+                    "hover" : false,
+                    "constrain_width" : false
+                });
         $("select").not(".disabled").material_select();
     }
 
@@ -199,21 +202,21 @@ jQuery(function() {
     function initRelNav() {
         var topRel = $("#page-content-block").find("> .rel-nav");
         var bottomRel = $("#bottom-rel-placeholder");
+        $(document).ready(function() {
+            $.force_appear();
+        });
         topRel.appear({
             interval : 100,
             force_process : true
         });
-        bottomRel.hide();
-
+        bottomRel.show();
         topRel.on("disappear", function() {
             bottomRel.show();
         });
-
         topRel.on("appear", function() {
             bottomRel.hide();
         });
     }
-
 });
 
 
