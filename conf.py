@@ -133,7 +133,9 @@ html_theme_options = {
     'top_nav_links': [
         ('Downloads', '#'),
         ('Issues', 'https://github.com/Softmotions/ejdb/issues')
-    ]
+    ],
+
+    #'analytics_id' : 'UA-36241306-1'
 }
 
 html_sidebars = {

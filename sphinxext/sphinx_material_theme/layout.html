@@ -205,6 +205,11 @@
 {{ script() }}
 {%- block extrascript %} {% endblock %}
 {%- endif %}
+{%- block analytics %}
+{%- if theme_analytics_id %}
+{%- include 'analytics.html' %}
+{%- endif %}
+{%- endblock %}
 <a id="btt"><i class="mdi-navigation-expand-less"></i></a>
 </body>
 </html>
