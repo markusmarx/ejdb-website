@@ -113,12 +113,12 @@ a.headerlink {
   float: right;
   .btn {
     padding: 0 1rem;
-    background-color: #009BDF;
+    background-color: #009bdf;
   }
 }
 
 .dropdown-content a {
-  color: #0197D8 !important;
+  color: #0197d8 !important;
 }
 
 #nav {
@@ -126,7 +126,7 @@ a.headerlink {
   ul {
     li {
       &:hover, &.active {
-        background-color: #0197D8;
+        background-color: #0197d8;
       }
     }
   }
@@ -285,6 +285,15 @@ a.headerlink {
   }
 }
 @import "btt";
+
+
+.highlight-link {
+  //margin-bottom: 0;
+  a {
+    background-color: #fbe54e;
+    padding: 0 5px;
+  }
+}
 
 /*----------------- Media mods -----------------------*/
 
