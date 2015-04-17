@@ -6,7 +6,9 @@ ul.search {
 }
 
 ul.search li {
+  margin-left: 0;
   padding: 5px 0 5px 20px;
+  list-style-type: none;
   background-image: url(file.png);
   background-repeat: no-repeat;
   background-position: 0 7px;

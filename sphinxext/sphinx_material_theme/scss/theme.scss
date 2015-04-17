@@ -173,6 +173,7 @@ a.headerlink {
 .page-content-wrapper {
   padding: 0;
   margin: 0;
+  position: relative;
 }
 
 .page-content {
@@ -283,6 +284,7 @@ a.headerlink {
     font-weight: bold;
   }
 }
+@import "btt";
 
 /*----------------- Media mods -----------------------*/
 

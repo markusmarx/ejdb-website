@@ -151,7 +151,7 @@
             {%- endmacro %}
             {{ relnav(1) }}
             <div class="page-content">
-            {% block body %}{% endblock %}
+                {% block body %}{% endblock %}
             </div>
         </div>
         <div id="page-content-footer">
@@ -206,5 +206,6 @@
 {{ script() }}
 {%- block extrascript %} {% endblock %}
 {%- endif %}
+<a id="btt"><i class="mdi-navigation-expand-less"></i></a>
 </body>
 </html>
