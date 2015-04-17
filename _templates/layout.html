@@ -1,0 +1,17 @@
+{%- extends "!layout.html" %}
+{%- block page_footer_left %}
+<h5 class="white-text">EJDB on Github</h5>
+<a class="github-button" href="https://github.com/Softmotions/ejdb" data-style="mega"
+   data-count-href="/Softmotions/ejdb/stargazers" data-count-api="/repos/Softmotions/ejdb#stargazers_count"
+   data-count-aria-label="# stargazers on GitHub" aria-label="Star Softmotions/ejdb on GitHub">Star</a>
+<a class="github-button" href="https://github.com/Softmotions/ejdb/issues" data-style="mega"
+   data-count-api="/repos/Softmotions/ejdb#open_issues_count" data-count-aria-label="# issues on GitHub"
+   aria-label="Issue Softmotions/ejdb on GitHub">Issue</a>
+{%- endblock %}
+{%- block extrascript %}
+{{ super() }}
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+{%- endblock %}
+
+
+

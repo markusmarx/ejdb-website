@@ -9,17 +9,17 @@ div.admonition {
   }
 
   &.note {
-    background-color: #e3f2fd;
+    background-color: $note-bg-color;
   }
 
   &.warning {
-    background-color: #009688;
-    color: #ffffff;
+    background-color: $warning-bg-color;
+    color: $warning-text-color;
   }
 
   &.error {
-    background-color: #a72f0a;
-    color: #ffffff;
+    background-color: $error-bg-color;
+    color: $error-text-color;
   }
 }
 

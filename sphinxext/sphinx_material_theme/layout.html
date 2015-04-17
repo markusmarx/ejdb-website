@@ -88,6 +88,7 @@
                 <li><a href="{{ pathto(l, 1) }}">{{ n }}</a></li>
                 {%- endfor %}
                 {%- endblock %}
+                {%- block topnav_li_extra_items %}{%- endblock %}
             </ul>
             <ul class="side-nav" id="nav-mobile-sidebar">
                 {{ self.topnav_li_items() }}
@@ -162,12 +163,12 @@
     </div>
 </div>
 {%- block footer %}
-<footer class="page-footer grey darken-4">
+<footer class="page-footer">
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
                 {%- block page_footer_left %}
-                <h5 class="white-text">Company Info</h5>
+                <h5>Company Info</h5>
 
                 <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's
                     our full time job. Any amount would help support and continue development on this project and is
@@ -175,19 +176,18 @@
                 {%- endblock %}
             </div>
             <div class="col l6 s12">
-                {%- block page_footer_links %}
-                <h5 class="white-text">Settings</h5>
+                {%- block page_footer_right %}
                 <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    {%- for n, l in theme_top_nav_links %}
+                    <li><a href="{{ pathto(l, 1) }}">{{ n }}</a></li>
+                    {%- endfor %}
                 </ul>
                 {%- endblock %}
             </div>
         </div>
     </div>
     {%- if show_copyright %}
-    <div class="footer-copyright black" role="contentinfo">
+    <div class="footer-copyright" role="contentinfo">
         <div class="container">
             {%- if hasdoc('copyright') %}
             {%- trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a class="orange-text text-lighten-3"

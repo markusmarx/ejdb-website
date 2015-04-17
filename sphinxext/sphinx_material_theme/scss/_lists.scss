@@ -54,7 +54,7 @@ dd {
 }
 
 dt:target, .highlighted {
-  background-color: #fbe54e;
+  background-color: $search-highlight-color;
 }
 
 dl.glossary dt {

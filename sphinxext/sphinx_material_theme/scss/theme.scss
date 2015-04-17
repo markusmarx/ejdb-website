@@ -4,10 +4,14 @@
 @import "materialize/components/prefixer";
 @import "materialize/components/mixins";
 @import "materialize/components/color";
-// Variables;
-@import "variables";
+
+// Theme variables;
+@import "theme_variables";
+@import "materialize/components/variables";
+
 // Reset
 @import "materialize/components/normalize";
+
 // components
 @import "materialize/components/global";
 @import "materialize/components/icons-material-design";
@@ -36,7 +40,7 @@
 @import "fonts";
 
 body {
-  background-color: #f4f4f4;
+  background-color: $body-bg-color;
 }
 
 div.clearer {
@@ -113,20 +117,20 @@ a.headerlink {
   float: right;
   .btn {
     padding: 0 1rem;
-    background-color: #009bdf;
+    background-color: $doc-nav-buttons-color;
   }
 }
 
 .dropdown-content a {
-  color: #0197d8 !important;
+  color: $link-color !important;
 }
 
 #nav {
-  background-color: #212121;
+  background-color: $doc-nav-header-color;
   ul {
     li {
       &:hover, &.active {
-        background-color: #0197d8;
+        background-color: $doc-nav-header-link-color;
       }
     }
   }
@@ -284,14 +288,34 @@ a.headerlink {
     font-weight: bold;
   }
 }
+
 @import "btt";
 
-
 .highlight-link {
-  //margin-bottom: 0;
   a {
-    background-color: #fbe54e;
+    background-color: $search-highlight-color;
     padding: 0 5px;
+  }
+}
+
+.page-footer {
+  a, h4, h5 {
+    color: $footer-text-color;
+  }
+  iframe {
+    margin: 10px 10px 0 0;
+  }
+}
+
+div.footer-copyright {
+  background-color: $footer-copyright-bg-color !important;
+}
+
+.side-nav {
+  a {
+    &:hover {
+      color: #ffffff;
+    }
   }
 }
 
