@@ -21,7 +21,7 @@ Features
 --------
 
 * Generic key-value storage using Hash or B+ tree index.
-* Support of transaction.
+* Collection level transactions.
 * Mongodb-like queries and overall philosophy.
 * Collection joins.
 * Language bindings:
