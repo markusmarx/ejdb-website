@@ -95,6 +95,18 @@ div.viewcode-block:target {
   padding: 0 10px;
 }
 
+
+cite {
+  background-color: rgba(0,0,0,0.06);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: 'Consolas', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.6;
+
+}
+
 /* -- math display ---------------------------------------------------------- */
 
 img.math {

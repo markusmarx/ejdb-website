@@ -208,7 +208,7 @@ a.headerlink {
     font-weight: bold;
   }
 
-  div.topic {
+  div.topic, .toctree-wrapper {
     /* border: 1px solid #ccc;
     */
     @extend .z-depth-1;

@@ -1,0 +1,14 @@
+
+Installation
+============
+
+
+.. toctree::
+
+    building
+    ubuntu
+
+
+
+
+
