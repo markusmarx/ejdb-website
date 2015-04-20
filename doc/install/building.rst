@@ -106,7 +106,7 @@ Build MXE packages:
      make
 
 
-Finally build libejdb windows binaries:
+Finally build `libejdb` windows binaries:
 
 .. code-block:: sh
 
