@@ -25,6 +25,16 @@ sys.path.append(os.path.abspath('sphinxext'))
 import sphinx_material_theme
 
 
+rst_epilog = """
+.. _homepage: http://ejdb.org
+.. |ejdbversion| replace:: 1.2.7
+.. |ejdb_w32_dl| replace:: EJDB for Windows x86
+.. _ejdb_w32_dl: https://dl.dropboxusercontent.com/u/4709222/ejdb/ejdb-1.2.7-Release-Windows-x86.tar.gz
+.. |ejdb_w64_dl| replace:: EJDB for Windows x86_64
+.. _ejdb_w64_dl: https://dl.dropboxusercontent.com/u/4709222/ejdb/ejdb-1.2.7-Release-Windows-x86_64.tar.gz
+"""
+
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.

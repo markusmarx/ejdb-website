@@ -1,4 +1,3 @@
-
 Installation
 ============
 
@@ -7,6 +6,8 @@ Installation
 
     building
     ubuntu
+    OSX <osx>
+    windows
 
 
 

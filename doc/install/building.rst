@@ -1,3 +1,4 @@
+.. _building:
 
 Building from sources
 =====================
@@ -66,8 +67,13 @@ CMake basic build(-D) options
     UPLOAD_PPA:BOOL=OFF
 
 
+.. _building_windows:
+
 Building native Windows libs
 ----------------------------
+
+EJDB binaries for `Windows` need to be build on `Linux`
+using cross-compilation within the `MXE cross build environment <http://mxe.cc>`_ environment.
 
 You need to checkout the `MXE cross build environment <http://mxe.cc>`_
 
@@ -102,6 +108,8 @@ Build libejdb windows binaries:
 .. code-block:: sh
 
     export MXE_HOME=<mxe checkout dir>
+    export MXE_CFG=<x86_64-w64-mingw32.static|i686-w64-mingw32.static>
+
     cd <ejdb checkout dir>
     mkdir build-win32
     cd build-wind32
