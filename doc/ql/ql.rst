@@ -89,11 +89,51 @@ The field value is not equal to any of provided alternatives.
     {'name' : {'$not' : {'$begin' : 'Andy'}}}
 
 
-
 .. note::
     Negation operations: `$not` and `$nin` are not using collection indexes
     so they can be slower in comparison to other matching operations.
 
+
+Case insensitive string matching ($icase)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: js
+
+    {'fpath' : {'$icase' : '...'}}
+
+**Example:**
+Case insensitive matching within `$in` operator:
+
+.. code-block:: js
+
+    db.building.find({'name' : {'$icase' : {'$in' : ['théâtre - театр', 'hello world']}}
+
+In order to perform effective case insensitive queries consider creating `JBIDXISTR` index on fields:
+
+**Nodejs API:**
+
+.. code-block:: js
+
+    ejdb> db.ensureIStringIndex
+    [Function] (cname, path, [cb]) Ensure case insensitive String index for JSON field path
+
+
+**C API:**
+
+.. code-block:: c
+
+    flags = flags | JBIDXISTR;
+    EJDB_EXPORT bool ejdbsetindex(EJCOLL *coll, const char *ipath, int flags);
+
+
+String starts with prefix ($begin)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Fieldpath starts with specified prefix:
+
+.. code-block:: js
+
+    'fpath' : {'$begin' : prefix}}
 
 
 Simple projections
@@ -165,11 +205,6 @@ Where `mode` is an integer specified the field inclusion mode:
 The mongodb `$ (projection) <http://docs.mongodb.org/manual/reference/operator/projection/positional/#proj._S_>`_ is also supported.
 Our implementation overcomes the mongodb restriction:
 `Only one array field can appear in the query document`
-
-
-
-
-
 
 
 Glossary
