@@ -73,7 +73,7 @@ Building native Windows libs
 ----------------------------
 
 EJDB binaries for `Windows` need to be build on `Linux`
-using cross-compilation within the MXE cross build environment environment.
+using cross-compilation within the MXE cross build environment.
 First of all you need to checkout the `MXE cross build environment <http://mxe.cc>`_
 
 .. code-block:: sh

@@ -182,9 +182,26 @@ a.headerlink {
 
 .page-content {
 
-  .section {
+  div.section {
     padding-top: 0;
     padding-bottom: 0;
+
+    > h1 > a.toc-backref,
+    > h2 > a.toc-backref,
+    > h3 > a.toc-backref,
+    > h4 > a.toc-backref,
+    > h5 > a.toc-backref {
+      color: $off-black;
+    }
+
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5 {
+      margin-top: 30px;
+
+    }
   }
 
   @import "lists";

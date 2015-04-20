@@ -9,18 +9,23 @@ EJDB command line interface provided as the part of :ref:`EJDB Nodejs <nodejs>` 
 Installation prerequisites
 --------------------------
 
-Linux
-*****
+* Installed node v0.8.x or v0.10.x or 0.12.x
+
+On Linux/OSX
+************
 
 * gcc >= `4.7` or clang >= `3.4` C compiler
 * zlib-dev
 
-Windows
-*******
+On Windows
+**********
 
 * MSVC 2010 express edition
-* Installed node v0.8.x or v0.10.x or 0.12.x
-* Manually installed `npm install tar.gz nan` packages (they needed during installation process)
+* Manually installed `tar.gz` and `nan` packages (they needed before installation process)
+
+.. code-block:: sh
+
+    npm install tar.gz nan
 
 
 Installation
