@@ -8,7 +8,7 @@ Mission
 EJDB is the embeddable (in-process) database engine designed for querying collections
 of `JSON <http://json.org>`_ documents and persisting data.
 EJDB implemented as C library based on `Tokyo Cabinet <http://fallabs.com/tokyocabinet/>`_
-key-value storage engine. EJDB design inspired by `Mongodb <http://mongodb.org>`_ and follows same philosophy
+key-value storage engine. EJDB design inspired by `Mongodb <http://mongodb.org>`_ and follows the same philosophy ,
 especially for the :ref:`query language <ql>`
 
 License
@@ -24,21 +24,18 @@ Features
 * Collection level transactions.
 * Mongodb-like queries and overall philosophy.
 * Collection joins.
-* Language bindings:
-    * Nodejs
-    * Python
-    * Lua
-    * Java
-    * Ruby
-    * .Net
-    * Go
+* Language bindings: Nodejs, Python, Lua, Java, Ruby, .Net, Go
 
 Documentation
 -------------
 .. toctree::
+    :maxdepth: 1
 
-    doc/install/installation
+    doc/snippets
+    doc/install/index
+    doc/cli
     doc/ql/ql
+    Language bindings <doc/bindings/index>
 
 
 

@@ -115,7 +115,8 @@ exclude_patterns = ['_build', 'old']
 #show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'borland'
+# pygments_style = 'borland'
+pygments_style = 'vs'
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []

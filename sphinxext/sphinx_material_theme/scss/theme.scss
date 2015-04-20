@@ -4,14 +4,11 @@
 @import "materialize/components/prefixer";
 @import "materialize/components/mixins";
 @import "materialize/components/color";
-
 // Theme variables;
 @import "theme_variables";
 @import "materialize/components/variables";
-
 // Reset
 @import "materialize/components/normalize";
-
 // components
 @import "materialize/components/global";
 @import "materialize/components/icons-material-design";
@@ -109,8 +106,11 @@ a.headerlink {
 
 .toctree-wrapper > ul {
   margin: 0;
-  padding: 10px 0 10px 20px;
+  padding: 10px 0 10px 10px;
   //background-color: #f4f4f4;
+  li {
+    margin-left: 10px;
+  }
 }
 
 .rel-nav {
