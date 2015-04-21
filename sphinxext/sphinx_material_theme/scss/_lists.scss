@@ -1,24 +1,35 @@
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
 li {
   p {
     margin-bottom: 0;
   }
 }
 
-ul {
-  margin: 0;
-}
-
-li {
+ul li {
   margin-left: 15px;
   list-style-type: disc;
 }
 
-li li {
+ul li li {
   list-style-type: circle;
 }
 
-li li li {
+ul li li li {
   list-style-type: square;
+}
+
+ol li {
+  margin-left: 15px;
+}
+
+ol li li {
+}
+
+ol li li li {
 }
 
 ol.arabic {
@@ -68,7 +79,7 @@ dl.glossary dt {
   font-size: 1.1em;
 }
 
-.field-list ul {
+.field-list ul,  {
   margin: 0;
   padding-left: 1em;
 }

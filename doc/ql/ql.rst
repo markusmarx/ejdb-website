@@ -3,11 +3,11 @@
 Query language
 --------------
 The form of EJDB queries inspired by `Mongodb <http://mongodb.org>`_ and follows the same philosophy. In many cases
-the EJDB queries are fully comparable with mongodb counterparts. Every EJDB query object can be considered as
+EJDB queries are fully comparable with mongodb counterparts. Every EJDB query object can be considered as
 JSON document which specifies the way how to retrieve or update a set of documents stored in particular database collection.
 The query objects can be joined together by `AND` or `OR` logical conjunctions. The way how to actually specify
 queries depends on an API of particular EJDB :ref:`language binding <bindings>`, anyway we will use an abstract
-queries represented as plain JSONs with some showcases where the :ref:`EJDB Nodejs CLI API <cli>` used.
+queries represented as plain JSONs with some showcases where :ref:`EJDB Nodejs CLI API <cli>` is used.
 
 First we define the following terms: :term:`abstract document` as a metadocument for all
 documents containing in particular collection without an actual field values and with all
@@ -16,21 +16,19 @@ You can consider `abstract document` as a prototype for all possible documents i
 In the context of an `abstract document` a :term:`fieldpath` is the path consisting of JSON field names traversed
 from the document's root to the particular document field.
 
-
 .. contents::
 
+Querying
+********
 
-Query operators
-***************
+.. _matching:
 
 Simple matching
 ^^^^^^^^^^^^^^^
 
-.. code-block:: js
+``{fieldpath1 : value1, fieldpath2 : value2, ...}``
 
-    {'fpath' : val, ...}
-
-Select all documents there their `fieldpath` values exactly matched to the values provided in query.
+Select all documents there their `fieldpath` values exactly matched to the values provided in the query.
 
 **Example:**
 
@@ -47,46 +45,53 @@ As argument of simple matching query values you can use a regular expressions:
 
 .. code-block:: js
 
-    db.addressbook.find({'firstName': /An.*/});
+    //Note the regular expression matching
+    ejdb> db.addressbook.find({'firstName': /An.*/});
     Found 1 records
     { _id: '55352c20a462ec6800000000',
       firstName: 'Andy',
       age: 39 }
 
+.. _$not:
+
 Negation logical operation ($not)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``{fieldpath : {$not : query}}``
 
 Any part of query can be wrapped by `$not` negation operator:
 
 .. code-block:: js
 
     //The field is not equal to val
-    {'fpath' : {'$not' : val}}
+    {'fieldpath' : {'$not' : val}}
 
     //The field is not equal to the provided subquery condition `{...}`
-    {'fpath' : {'$not' : {...}}}
+    {'fieldpath' : {'$not' : {...}}}
 
 
-Negation not in ($nin)
-^^^^^^^^^^^^^^^^^^^^^^
+**Example:**
 
-Negation of `$in` operator.
+.. code-block:: js
+
+    //Person's name not begins with 'Andy'
+    ejdb> db.persons.find({'name' : {'$not' : {'$begin' : 'Andy'}}});
+
+.. _$nin:
+
+Not in ($nin)
+^^^^^^^^^^^^^
+
+``{fieldpath : {$nin : [value1, value2, ...]}}``
+
+Negation of `$in`_ operator.
 The field value is not equal to any of provided alternatives.
 
 **Example:**
 
 .. code-block:: js
 
-    db.find('name' : {"$nin" : ['John Travolta', 'Ivanov']});
-
-
-**Example:**
-
-.. code-block:: js
-
-
-    //Name not begins with 'Andy'
-    {'name' : {'$not' : {'$begin' : 'Andy'}}}
+    ejdb> db.persons.find({'name' : {"$nin" : ['John Travolta', 'Ivanov']}});
 
 
 .. note::
@@ -94,19 +99,34 @@ The field value is not equal to any of provided alternatives.
     so they can be slower in comparison to other matching operations.
 
 
+.. _$in:
+
+Field equals to any member in the provided set ($in)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``{fieldpath : {$in : [value1, value2, ...]}``
+
+If the `fieldpath` holds an array, then the `$in` operator selects the documents whose `fieldpath`
+holds an array that contains at least one element that matches a value in the set
+specified within `$in` array.
+
+
+
+.. _$icase:
+
 Case insensitive string matching ($icase)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: js
-
-    {'fpath' : {'$icase' : '...'}}
+``{fieldpath : {$icase : query}}``
 
 **Example:**
-Case insensitive matching within `$in` operator:
+Case insensitive matching within `$in`_ operator:
 
 .. code-block:: js
 
-    db.building.find({'name' : {'$icase' : {'$in' : ['théâtre - театр', 'hello world']}}
+    ejdb> db.building.find(
+        {'name' : {'$icase' : {'$in' : ['théâtre - театр', 'hello world']}}}
+    );
 
 In order to perform effective case insensitive queries consider creating `JBIDXISTR` index on fields:
 
@@ -126,24 +146,220 @@ In order to perform effective case insensitive queries consider creating `JBIDXI
     EJDB_EXPORT bool ejdbsetindex(EJCOLL *coll, const char *ipath, int flags);
 
 
+.. _$begin:
+
 String starts with prefix ($begin)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Fieldpath starts with specified prefix:
 
+``{fieldpath : {$begin : prefix}} }``
+
+**Example:**
+
 .. code-block:: js
 
-    'fpath' : {'$begin' : prefix}}
+    //Person's name not begins with 'Andy'
+    ejdb> db.persons.find({'name' : {'$not' : {'$begin' : 'Andy'}}});
 
 
 Simple projections
 ^^^^^^^^^^^^^^^^^^
 
-You can select only specific document fields by providing `$fields` query :ref:`hints <qhints>`:
+You may select only specific document fields by providing `$fields` query :ref:`hints <qhints>`:
 
 .. code-block:: js
 
-    db.addressbook.find({'firstName': /An.*/}, {$fields: {age:1}});
+    ejdb> db.addressbook.find({'firstName': /An.*/}, {$fields: {age:1}});
+
+
+See the `$fields`_ projection operator.
+
+
+AND/OR joining of query expressions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. _$or:
+
+OR joined conditions
+~~~~~~~~~~~~~~~~~~~~
+
+In order to use the logical `OR` joining of query clauses you have two options:
+
+1. Use the API of EJDB `find()` function, as shown in following nodejs example: (todo link nodejs function description)
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.addressbook.find({}, [{age: 38}, {age: 39}]);
+
+In this example the array of `OR` joined query clauses passed as the second argument of the `find` function.
+
+2. Use `$or` query operator in the following form:
+
+``{$or: [ query1, query2, ...] }``
+
+`$or` performs a logical `OR` operation on an array of two or more subqueries.
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.addressbook.find({'$or': [{age: 38}, {age: 39}]});
+
+
+.. _$and:
+
+AND joined conditions
+~~~~~~~~~~~~~~~~~~~~~
+
+``{$and: [ query1, query2, ...] }``
+
+`$and` performs a logical `AND` operation on an array of two or more subqueries.
+
+.. note::
+
+ | The `$or` and `$and` operators can be nested together,
+ | **Example:** ``{z: 33, $and : [ {$or: [{a: 1}, {b: 2}]}, {$or: [{c: 5}, {d: 7}]} ] }``
+
+
+.. _$gt:
+.. _$gte:
+.. _$lt:
+.. _$lte:
+.. _$bt:
+
+Conditions on numeric values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Comparison operators `$gt`, `$gte` and `$lt`, `$lte`
+are used for numeric datatypes.
+
+* `$gt` Value greater than `>`
+* `$gte` Value greater than or equal to `>=`
+* `$lt` Value lesser than `<`
+* `$lte` Value lesser than or equal to `<=`
+* `$bt` Value within the specified range inclusively. ``{fieldpath : {$bt : [lower, upper]}}``
+
+**Example:** find all persons with `age >= 38`:
+
+.. code-block:: js
+
+     ejdb> db.addressbook.find({age: {$gte: 38}});
+
+**Example:** find all persons with `age >= 38 and age <= 40`:
+
+.. code-block:: js
+
+     ejdb> db.addressbook.find({age: {$bt: [38, 40]}});
+
+
+.. _$stror:
+
+String tokens matching ($stror)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``{fieldpath:  {$stror: [value1, value2, ....]}``
+
+* If the `fieldpath` holds a `string` value the `$stror` operator converts this value
+  into an array of string tokens by splitting original value into a set of tokens separated by space `' '`
+  or comma `','` characters. Then the operator selects documents whose set of tokens contains any token
+  specified in `$stror` array ``[value1, value2, ...]``.
+
+* If the `fieldpath` value is a string `array` the `$stror` operator selects
+  documents whose `fieldpath` array contains any tokens specified in
+  `$stror` array ``[value1, value2, ...]``.
+
+.. _$stror_example:
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.save('books', {'title' : 'All the Light We Cannot See'});
+    ejdb> db.save('books', {'title' : 'Little Blue Truck Board Book'});
+    ejdb> db.save('books', {'title' : 'The Book with No Pictures'});
+
+    ejdb> db.books.find({title : {$icase : {$stror : ['book', 'light']}}});
+    Found 3 records
+    { _id: '55365fa019808d3c00000000',
+      title: 'All the Light We Cannot See' }
+    { _id: '55365fcb19808d3c00000001',
+      title: 'Little Blue Truck Board Book' }
+    { _id: '55365ff819808d3c00000002',
+      title: 'The Book with No Pictures' }
+
+
+.. _$strand:
+
+String tokens matching ($strand)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``{fieldpath:  {$strand: [value1, value2, ....]}``
+
+* If the `fieldpath` holds a `string` value the `$strand` operator converts this value
+  into an array of string tokens by splitting original value into a set of tokens separated by space `' '`
+  or comma `','` characters. Then the operator selects documents whose set of tokens contains all
+  tokens specified in `$strand` array ``[value1, value2, ...]``.
+
+* If the `fieldpath` value is a string `array` the `$strand` operator selects
+  documents whose `fieldpath` array contains all tokens specified in
+  `$strand` array ``[value1, value2, ...]``.
+
+  See :ref:`$stror example <$stror_example>`
+
+
+.. _$exists:
+
+Fieldpath existence checking ($exists)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``{fieldpath: {$exists: true|false}}``
+
+When `$exists` value set to `true`, the documents that contain the `fieldpath` will be matched,
+including documents where the value of `fieldpath` is null. Otherwise this operator returns documents
+that do not contain the specified `fieldpath`.
+
+.. _$elemMatch:
+
+Array element matching ($elemMatch)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``{fieldpath: {$elemMatch: query}}}``
+
+The `$elemMatch` operator matches `fieldpath` array values against the specified `query`
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.save('persons', {name: 'Andy',
+                              childs: [
+                                        {name: 'Garry', age: 2},
+                                        {name: 'Sally', age: 4}
+                                      ]
+                              });
+
+    ejdb> db.persons.find({childs : {$elemMatch : {name: 'Garry', age:2}}});
+    Found 1 records
+    { _id: '5536764019808d3c00000004',
+      name: 'Andy',
+      childs:
+       [ { name: 'Garry', age: 2 },
+         { name: 'Sally', age: 4 } ] }
+
+If you specify only a single query condition in the `$elemMatch` operator, you do not need to use `$elemMatch`:
+
+.. code-block:: js
+
+    ejdb> db.persons.find({'childs.name' : 'Garry'});
+    // This is equivalent to:
+    ejdb> db.persons.find({childs : {$elemMatch : {name: 'Garry'}}});
+
+.. note::
+
+    Only one `$elemMatch` operator allowed in the context of one array `fieldpath`.
 
 
 .. _qhints:
@@ -151,11 +367,15 @@ You can select only specific document fields by providing `$fields` query :ref:`
 Query hints
 ***********
 
+.. _$max:
+
 $max
 ^^^^
 
 The maximum number of documents retrieved.
 
+
+.. _$skip:
 
 $skip
 ^^^^^
@@ -163,15 +383,15 @@ $skip
 The number of skipped results in the result set
 
 
+.. _$orderby:
+
 $orderby
 ^^^^^^^^
 
 The sorting order of query fields specified as JSON mapping of document `fieldpaths`
 to its orderby modes:
 
-.. code-block:: js
-
-    {$orderby: {'fpath': mode, ...}
+``{$orderby: {'fieldpath': mode, ...}``
 
 Where `mode` is and integer specified sort order:
 
@@ -185,14 +405,14 @@ Where `mode` is and integer specified sort order:
    db.addressbook.find({}, {$orderby: {age:1, name:-1}});
 
 
+.. _$fields:
+
 $fields
 ^^^^^^^
 
 The document fields projection.
 
-.. code-block:: js
-
-    {$fields: {'fpath': mode, ...}
+``{$fields: {'fieldpath': mode, ...}``
 
 Where `mode` is an integer specified the field inclusion mode:
 
@@ -206,6 +426,157 @@ The mongodb `$ (projection) <http://docs.mongodb.org/manual/reference/operator/p
 Our implementation overcomes the mongodb restriction:
 `Only one array field can appear in the query document`
 
+.. _$(projection):
+
+$ (projection)
+~~~~~~~~~~~~~~
+
+``{$fields: {'prefix.$[.postfix]' : 1}``
+
+The key `$` within the `$fields`_ projection limits the contents of an `array` field
+returned as query results to contain only the first element matching the query. The `$` letter
+means here the array index of the mached record.
+
+**Example:**
+
+.. code-block:: js
+
+    // Not using $ projection
+    ejdb> db.persons.find({childs : {$elemMatch : {name: 'Garry', age:2}}}, {$fields : {'childs' : 1}});
+    Found 1 records
+    { childs:
+       [ { name: 'Garry', age: 2 },
+         { name: 'Sally', age: 4 } ] }
+
+
+    // Usign $ projection
+    ejdb> db.persons.find({childs : {$elemMatch : {name: 'Garry', age:2}}}, {$fields : {'childs.$' : 1}});
+    Found 1 records
+    { _id: '5536764019808d3c00000004',
+      childs: [ { name: 'Garry', age: 2 } ] }
+
+`$` array projection can be in middle of `fieldpath`:
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.save('records',
+                  {z: 44,
+                   arr: [ { h: 1 }, { h: 2, g: 4 } ]
+                  });
+
+    ejdb> db.records.find({z: 44, arr: {$elemMatch: {h: 2}} }, {$fields: {'arr.$.h': 1}});
+    Found 1 records
+    { _id: '55368bda19808d3c00000007',
+      arr: [ { h: 2 } ] }
+
+
+.. note::
+
+    Our implementation overcomes the following mongodb projection limitation:
+    `Only one array field can appear in the query document <http://docs.mongodb.org/manual/reference/operator/projection/positional/#array-field-limitations>`_
+    You are allowed to use the `$` array projections for many fields simultaneously within one query.
+
+
+Data modification
+*****************
+
+.. _$set:
+
+$set
+^^^^
+
+``{$set: {fieldpath1: value1, ... } }``
+
+The `$set` directive sets the value of the specified fields.
+
+If the `fieldpath` does not exist in the document, `$set` will add a new fields with the specified value(s).
+The `$set` can create all required subdocuments within the updated documents on order to ensure what `fieldpath`
+exists in each of them. If you specify multiple field-value pairs, `$set` will update or create each field.
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.save('coll', {});
+    ejdb> db.coll.find();
+    Found 1 records
+    { _id: '553697b1d131946100000001' }
+
+    ejdb> db.coll.update({'$set':{'foo.bar':'text'}});
+    ejdb> db.coll.find()
+    Found 1 records
+    { _id: '5536934bd131946100000000',
+      foo: { bar: 'text' } }
+
+
+.. _$upsert:
+
+$upsert
+^^^^^^^
+
+``{query, $upsert : {fieldpath1: value1, fieldpath2: value2, ...}}``
+
+Atomic upsert. If documents matched to the specified `query` are found then `$upsert` will performs as `$set`_
+operation, otherwise a new document will be inserted with its fields being initialised to
+the provided values.
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.books.find();
+    Found 0 records
+
+    //Insert
+    ejdb> db.books.update({isbn:'0123456789',
+                          '$upsert': {isbn:'0123456789', 'name':'my book'}});
+    ejdb> db.books.find();
+    Found 1 records
+    { _id: '5536a054d131946100000002',
+      isbn: '0123456789',
+      name: 'my book' }
+
+    //Update
+    ejdb> db.books.update({isbn:'0123456789',
+                          '$upsert': {isbn:'0123456789', 'name':'my old book'}});
+    ejdb> db.books.find();
+    Found 1 records
+    { _id: '5536a054d131946100000002',
+      isbn: '0123456789',
+      name: 'my old book' }
+
+.. _$dropall:
+
+$dropall
+^^^^^^^^
+
+``{query, $dropall : true}``
+
+In-place record removal operation. All documents matched the specified `query`
+will be removed from collection.
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.books.find();
+    Found 3 records
+    { _id: '55365fa019808d3c00000000',
+      title: 'All the Light We Cannot See' }
+    { _id: '55365fcb19808d3c00000001',
+      title: 'Little Blue Truck Board Book' }
+    { _id: '55365ff819808d3c00000002',
+      title: 'The Book with No Pictures' }
+
+    //Remove all books with `title` contains a `Book` token.
+    ejdb> db.books.update({title: {$strand: ['Book']}, $dropall:true});
+
+    ejdb> db.books.find();
+    Found 1 records
+    { _id: '55365fa019808d3c00000000',
+      title: 'All the Light We Cannot See' }
 
 Glossary
 --------
@@ -230,54 +601,13 @@ Glossary
  * EJDB queries inspired by MongoDB (mongodb.org) and follows same philosophy.
  *
  *  - Supported queries:
- *      - Simple matching of String OR Number OR Array value:
- *          -   {'fpath' : 'val', ...}
- *      - $not Negate operation.
- *          -   {'fpath' : {'$not' : val}} //Field not equal to val
- *          -   {'fpath' : {'$not' : {'$begin' : prefix}}} //Field not begins with val
- *      - $begin String starts with prefix
- *          -   {'fpath' : {'$begin' : prefix}}
- *      - $gt, $gte (>, >=) and $lt, $lte for number types:
- *          -   {'fpath' : {'$gt' : number}, ...}
- *      - $bt Between for number types:
- *          -   {'fpath' : {'$bt' : [num1, num2]}}
- *      - $in String OR Number OR Array val matches to value in specified array:
- *          -   {'fpath' : {'$in' : [val1, val2, val3]}}
- *      - $nin - Not IN
- *      - $strand String tokens OR String array val matches all tokens in specified array:
- *          -   {'fpath' : {'$strand' : [val1, val2, val3]}}
- *      - $stror String tokens OR String array val matches any token in specified array:
- *          -   {'fpath' : {'$stror' : [val1, val2, val3]}}
- *      - $exists Field existence matching:
- *          -   {'fpath' : {'$exists' : true|false}}
- *      - $icase Case insensitive string matching:
- *          -    {'fpath' : {'$icase' : 'val1'}} //icase matching
- *          Ignore case matching with '$in' operation:
- *          -    {'name' : {'$icase' : {'$in' : ['théâtre - театр', 'hello world']}}}
- *          For case insensitive matching you can create special index of type: `JBIDXISTR`
- *      - $elemMatch The $elemMatch operator matches more than one component within an array element.
- *          -    { array: { $elemMatch: { value1 : 1, value2 : { $gt: 1 } } } }
- *          Restriction: only one $elemMatch allowed in context of one array field.
- *      - $and, $or joining:
- *          -   {..., $and : [subq1, subq2, ...] }
- *          -   {..., $or  : [subq1, subq2, ...] }
- *          Example: {z : 33, $and : [ {$or : [{a : 1}, {b : 2}]}, {$or : [{c : 5}, {d : 7}]} ] }
  *
- *      - Mongodb $(projection) operator supported. (http://docs.mongodb.org/manual/reference/projection/positional/#proj._S_)
  *      - Mongodb positional $ update operator supported. (http://docs.mongodb.org/manual/reference/operator/positional/)
  *
  *  - Queries can be used to update records:
  *
- *      $set Field set operation.
- *          - {.., '$set' : {'fpath1' : val1, 'fpathN' : valN}}
- *      $upsert Atomic upsert. If matching records are found it will be '$set' operation,
- *              otherwise new record will be inserted
- *              with fields specified by argment object.
- *          - {.., '$upsert' : {'fpath1' : val1, 'fpathN' : valN}}
  *      $inc Increment operation. Only number types are supported.
  *          - {.., '$inc' : {'fpath1' : number, ...,  'fpath2' : number}
- *      $dropall In-place record removal operation.
- *          - {.., '$dropall' : true}
  *      $addToSet Atomically adds value to the array only if its not in the array already.
  *                If containing array is missing it will be created.
  *          - {.., '$addToSet' : {'fpath' : val1, 'fpathN' : valN, ...}}
