@@ -44,6 +44,7 @@ Documentation
     doc/ql/ql
     doc/ql/joins
     Language bindings <doc/bindings/index>
+    doc/iexp/index
 
 
 

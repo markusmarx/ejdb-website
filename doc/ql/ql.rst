@@ -1,7 +1,7 @@
 .. _ql:
 
 Query language
---------------
+==============
 The form of EJDB queries inspired by `Mongodb <http://mongodb.org>`_ and follows the same philosophy. In many cases
 EJDB queries are fully comparable with mongodb counterparts. Every EJDB query object can be considered as
 JSON document which specifies the way how to retrieve or update a set of documents stored in particular database collection.
@@ -19,12 +19,12 @@ from the document's root to the particular document field.
 .. contents::
 
 Querying
-********
+--------
 
 .. _matching:
 
 Simple matching
-^^^^^^^^^^^^^^^
+***************
 
 ``{fieldpath1 : value1, fieldpath2 : value2, ...}``
 
@@ -55,7 +55,7 @@ As argument of simple matching query values you can use a regular expressions:
 .. _$not:
 
 Negation logical operation ($not)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*********************************
 
 ``{fieldpath : {$not : query}}``
 
@@ -80,7 +80,7 @@ Any part of query can be wrapped by `$not` negation operator:
 .. _$nin:
 
 Not in ($nin)
-^^^^^^^^^^^^^
+*************
 
 ``{fieldpath : {$nin : [value1, value2, ...]}}``
 
@@ -102,7 +102,7 @@ The field value is not equal to any of provided alternatives.
 .. _$in:
 
 Field equals to any member in the provided set ($in)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+****************************************************
 
 ``{fieldpath : {$in : [value1, value2, ...]}``
 
@@ -111,11 +111,10 @@ holds an array that contains at least one element that matches a value in the se
 specified within `$in` array.
 
 
-
 .. _$icase:
 
 Case insensitive string matching ($icase)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*****************************************
 
 ``{fieldpath : {$icase : query}}``
 
@@ -149,7 +148,7 @@ In order to perform effective case insensitive queries consider creating `JBIDXI
 .. _$begin:
 
 String starts with prefix ($begin)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**********************************
 
 Fieldpath starts with specified prefix:
 
@@ -164,7 +163,7 @@ Fieldpath starts with specified prefix:
 
 
 Simple projections
-^^^^^^^^^^^^^^^^^^
+******************
 
 You may select only specific document fields by providing `$fields` query :ref:`hints <qhints>`:
 
@@ -177,12 +176,12 @@ See the `$fields`_ projection operator.
 
 
 AND/OR joining of query expressions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+***********************************
 
 .. _$or:
 
 OR joined conditions
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 
 In order to use the logical `OR` joining of query clauses you have two options:
 
@@ -212,7 +211,7 @@ In this example the array of `OR` joined query clauses passed as the second argu
 .. _$and:
 
 AND joined conditions
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 ``{$and: [ query1, query2, ...] }``
 
@@ -231,7 +230,7 @@ AND joined conditions
 .. _$bt:
 
 Conditions on numeric values
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+****************************
 
 Comparison operators `$gt`, `$gte` and `$lt`, `$lte`
 are used for numeric datatypes.
@@ -258,7 +257,7 @@ are used for numeric datatypes.
 .. _$stror:
 
 String tokens matching ($stror)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+*******************************
 
 ``{fieldpath:  {$stror: [value1, value2, ....]}``
 
@@ -294,7 +293,7 @@ String tokens matching ($stror)
 .. _$strand:
 
 String tokens matching ($strand)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+********************************
 
 ``{fieldpath:  {$strand: [value1, value2, ....]}``
 
@@ -313,7 +312,7 @@ String tokens matching ($strand)
 .. _$exists:
 
 Fieldpath existence checking ($exists)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**************************************
 
 ``{fieldpath: {$exists: true|false}}``
 
@@ -324,7 +323,7 @@ that do not contain the specified `fieldpath`.
 .. _$elemMatch:
 
 Array element matching ($elemMatch)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+***********************************
 
 ``{fieldpath: {$elemMatch: query}}}``
 
@@ -365,12 +364,12 @@ If you specify only a single query condition in the `$elemMatch` operator, you d
 .. _qhints:
 
 Query hints
-***********
+-----------
 
 .. _$max:
 
 $max
-^^^^
+****
 
 The maximum number of documents retrieved.
 
@@ -378,7 +377,7 @@ The maximum number of documents retrieved.
 .. _$skip:
 
 $skip
-^^^^^
+*****
 
 The number of skipped results in the result set
 
@@ -386,7 +385,7 @@ The number of skipped results in the result set
 .. _$orderby:
 
 $orderby
-^^^^^^^^
+********
 
 The sorting order of query fields specified as JSON mapping of document `fieldpaths`
 to its orderby modes:
@@ -408,7 +407,7 @@ Where `mode` is and integer specified sort order:
 .. _$fields:
 
 $fields
-^^^^^^^
+*******
 
 The document fields projection.
 
@@ -429,7 +428,7 @@ Our implementation overcomes the mongodb restriction:
 .. _$(projection):
 
 $ (projection)
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
 ``{$fields: {'prefix.$[.postfix]' : 1}``
 
@@ -480,12 +479,12 @@ means here the array index of the mached record.
 
 
 Data manipulation
-*****************
+-----------------
 
 .. _$set:
 
 $set
-^^^^
+****
 
 ``{$set: {fieldpath1: value1, ... } }``
 
@@ -514,7 +513,7 @@ exists in each of them. If you specify multiple field-value pairs, `$set` will u
 .. _$upsert:
 
 $upsert
-^^^^^^^
+*******
 
 ``{query, $upsert : {fieldpath1: value1, fieldpath2: value2, ...}}``
 
@@ -550,7 +549,7 @@ the provided values.
 .. _$dropall:
 
 $dropall
-^^^^^^^^
+********
 
 ``{query, $dropall : true}``
 
@@ -582,7 +581,7 @@ will be removed from collection.
 .. _$inc:
 
 $inc
-^^^^
+****
 
 ``{$inc: {fieldpath1: delta1, fieldpath2: delta2, ... }}``
 
@@ -605,7 +604,7 @@ can be positive or negative number. The `$inc` operator does not create the spec
 .. _$unset:
 
 $unset
-^^^^^^
+******
 
 ``{$unset: {fieldpath1: "", fiedlpath2: "", ...}``
 
@@ -636,7 +635,7 @@ The unset `fieldpath` values `""` used here in order to be comparable with
 .. _$ (update):
 
 $ (update)
-^^^^^^^^^^
+**********
 
 The positional `$` operator identifies an element in an array
 to update without explicitly specifying the position of the element in the array.
@@ -689,7 +688,7 @@ operator has no effect it that case.
 .. _$addToSetAll:
 
 $addToSet and $addToSetAll
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+**************************
 
 ``{query, $addToSet: {fieldpath1: value1, fieldpath2: value2, ...}}``
 
@@ -758,7 +757,7 @@ in this case every value will be added only if it was not contained in the targe
 .. _$pullAll:
 
 $pull and $pullAll
-^^^^^^^^^^^^^^^^^^
+******************
 
 ``{query, $pull: {fieldpath1: value1, fieldpath2: value2, ...}}``
 
@@ -776,7 +775,7 @@ This is atomic operation.
 .. _$rename:
 
 $rename
-^^^^^^^
+*******
 
 ``{query, $rename' : {fieldpath1 : name1, fieldpath2 : name2, ...}}``
 
@@ -789,7 +788,7 @@ to the new `name`.
 .. _$slice (projection):
 
 $slice (projection)
-^^^^^^^^^^^^^^^^^^^
+*******************
 
 1. ``${..., $do: {fieldpath : {$slice : limit}}``
 2. ``${..., $do: {fieldpath : {$slice : [offset, limit]}}``
