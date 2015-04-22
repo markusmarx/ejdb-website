@@ -3,38 +3,14 @@
 Command line interface
 ======================
 
-EJDB command line interface provided as the part of :ref:`EJDB Nodejs <nodejs>` binding module published in
+EJDB command line interface provided as the part of :ref:`ejdb-node module <nodejs>` published in
 `Nodejs Package Manager(NPM) repository <https://www.npmjs.com/package/ejdb>`_.
-
-Installation prerequisites
---------------------------
-
-* Installed node v0.8.x or v0.10.x or 0.12.x
-
-On Linux/OSX
-************
-
-* gcc >= `4.7` or clang >= `3.4` C compiler
-* zlib-dev
-
-On Windows
-**********
-
-* MSVC 2010 express edition
-* Manually installed `tar.gz` and `nan` packages (they needed before installation process)
-
-.. code-block:: sh
-
-    npm install tar.gz nan
-
 
 Installation
 ------------
 
-.. code-block:: sh
-
-    npm install -g ejdb
-
+You need the :ref:`ejdb-node module <nodejs>` installed on your system, to do this follow
+the :ref:`ejdb-node installation guide <nodejs_installation>`
 
 Program options
 ---------------

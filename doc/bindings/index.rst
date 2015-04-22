@@ -5,7 +5,7 @@ EJDB language bindings
 
 .. toctree::
 
-    nodejs
+    nodejs/index
     python
     java
     lua

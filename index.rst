@@ -42,6 +42,7 @@ Documentation
     doc/install/index
     doc/cli
     doc/ql/ql
+    doc/ql/joins
     Language bindings <doc/bindings/index>
 
 

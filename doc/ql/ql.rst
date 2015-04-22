@@ -479,7 +479,7 @@ means here the array index of the mached record.
     You are allowed to use the `$` array projections for many fields simultaneously within one query.
 
 
-Data modification
+Data manipulation
 *****************
 
 .. _$set:
@@ -554,7 +554,7 @@ $dropall
 
 ``{query, $dropall : true}``
 
-In-place record removal operation. All documents matched the specified `query`
+In-place document removal operation. All documents matched the specified `query`
 will be removed from collection.
 
 **Example:**
@@ -578,6 +578,280 @@ will be removed from collection.
     { _id: '55365fa019808d3c00000000',
       title: 'All the Light We Cannot See' }
 
+
+.. _$inc:
+
+$inc
+^^^^
+
+``{$inc: {fieldpath1: delta1, fieldpath2: delta2, ... }}``
+
+Increment numeric field value by specified `delta`. The increment `delta`
+can be positive or negative number. The `$inc` operator does not create the specified
+`fieldpath` if it is not exists in the document.
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.save('inc', {counter:0});
+    ejdb> db.update('inc', {$inc: {counter:-2}});
+    ejdb> db.inc.find();
+    Found 1 records
+    { _id: '55373cb619808d3c00000009',
+      counter: -2 }
+
+
+.. _$unset:
+
+$unset
+^^^^^^
+
+``{$unset: {fieldpath1: "", fiedlpath2: "", ...}``
+
+The `$unset` operator deletes the document fields specified by `fieldpath`.
+The unset `fieldpath` values `""` used here in order to be comparable with
+`mongodb $unset operation <http://docs.mongodb.org/manual/reference/operator/update/unset/>`_
+
+`$unset` can be used together with `$ (update)`_ operator:
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.coll.find()
+    Found 1 records
+    { _id: '5537447f19808d3c0000000a',
+      a: [ 'b', 'cc', 'd' ] }
+
+    //Then apply unset to the `a.cc` array element
+    ejdb> db.coll.update({'a':'cc', $unset : {'a.$':''}});
+
+    ejdb> db.coll.find();
+    Found 1 records
+    { _id: '5537447f19808d3c0000000a',
+      a: [ 'b', undefined, 'd' ] }
+
+
+.. _$ (update):
+
+$ (update)
+^^^^^^^^^^
+
+The positional `$` operator identifies an element in an array
+to update without explicitly specifying the position of the element in the array.
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.save('coll', {a : ['b','c','d']});
+    ejdb> db.coll.find();
+    Found 1 records
+    { _id: '5537447f19808d3c0000000a',
+      a: [ 'b', 'c', 'd' ] }
+
+    //Then update with positional 'a.$'
+    ejdb> db.coll.update({'a':'c', $set : {'a.$':'cc'}});
+
+    ejdb> db.coll.find()
+    Found 1 records
+    { _id: '5537447f19808d3c0000000a',
+      a: [ 'b', 'cc', 'd' ] }
+
+If the specified array `fieldpath` is not contained in the query the `$ (update)`
+operator has no effect it that case.
+
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.coll.find();
+    Found 1 records
+    { _id: '5537447f19808d3c0000000a',
+      a: [ 'b', c, 'd' ],
+      c: 11 }
+
+    // Note: `a` field is not contained in the query:
+    ejdb> db.coll.update({'c':11, $unset : {'a.$':''}});
+
+    //Document remains unchanged
+    ejdb> db.coll.find();
+    Found 1 records
+    { _id: '5537447f19808d3c0000000a',
+      a: [ 'b', c, 'd' ],
+      c: 11 }
+
+
+
+.. _$addToSet:
+.. _$addToSetAll:
+
+$addToSet and $addToSetAll
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``{query, $addToSet: {fieldpath1: value1, fieldpath2: value2, ...}}``
+
+Add a specified value to the array only if it was not in the array.
+This is atomic operation.
+
+`$addToSetAll` is the batch version of `$addToSet` operator:
+
+``{query, $addToSetAll: {fieldpath1: [...], fieldpath2: [...], ...}}``
+
+Add a set of values to the array of every `fieldpath` specified in the query,
+in this case every value will be added only if it was not contained in the target array.
+
+.. seealso::
+    The `$addToSet` and `$addToSetAll` are the dual operations to
+    `$pull`_ and  `$pullAll`_
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.songs.find();
+    Found 1 records
+    { _id: '553761dd19808d3c0000000b',
+      name: 'Let It Be',
+      tags: [] }
+
+    //Add some tags:
+    db.songs.update(
+        {_id:'553761dd19808d3c0000000b',
+            $addToSetAll: {
+                tags:['the beatles', 'rock', '60s']
+            }
+    });
+
+    ejdb> db.songs.find();
+    Found 1 records
+    { _id: '553761dd19808d3c0000000b',
+      name: 'Let It Be',
+      tags: [ 'the beatles', 'rock', '60s' ] }
+
+
+    //One more tag:
+    db.songs.update(
+        {_id:'553761dd19808d3c0000000b',
+            $addToSetAll: {
+                tags:['the beatles', 'rock', '60s', 'classic rock']
+            }
+    });
+
+    //All elements in `tags` being merged
+    // with the passed tags array:
+    ejdb> db.songs.find();
+    Found 1 records
+    { _id: '553761dd19808d3c0000000b',
+      name: 'Let It Be',
+      tags:
+       [ 'the beatles',
+         'rock',
+         '60s',
+         'classic rock' ] }
+
+
+
+.. _$pull:
+.. _$pullAll:
+
+$pull and $pullAll
+^^^^^^^^^^^^^^^^^^
+
+``{query, $pull: {fieldpath1: value1, fieldpath2: value2, ...}}``
+
+Remove a specified `value` from the array field pointed by `fieldpath`.
+This is atomic operation.
+
+`$pullAll` is the batch version of `$pull` operator:
+
+``{query, $pullAll: {fieldpath1: [...], fieldpath2: [...], ...}}``
+
+.. seealso::
+    The `$pull` and `$pullAll` are the dual operations to
+    `$addToSet`_ and  `$addToSetAll`_
+
+.. _$rename:
+
+$rename
+^^^^^^^
+
+``{query, $rename' : {fieldpath1 : name1, fieldpath2 : name2, ...}}``
+
+Sets a new `name` to the field pointed by `fieldpath`.
+If the document already has a field with the specified `name`,
+the `$rename` operator removes that field and renames the field pointed by `fieldpath`
+to the new `name`.
+
+
+.. _$slice (projection):
+
+$slice (projection)
+^^^^^^^^^^^^^^^^^^^
+
+1. ``${..., $do: {fieldpath : {$slice : limit}}``
+2. ``${..., $do: {fieldpath : {$slice : [offset, limit]}}``
+
+The `$slice` operator used in context of `$do`_ directive and
+limits a number of array items returned for document fields pointed by `fieldpath`.
+
+Only non negative offsets are supported by the `$slice` projection. (EJDB |ejdbversion|)
+
+**Example:**
+
+.. code-block:: js
+
+    ejdb> db.songs.find();
+    Found 1 records
+    { _id: '553761dd19808d3c0000000b',
+      name: 'Let It Be',
+      tags:
+       [ 'the beatles',
+         'rock',
+         '60s',
+         'classic rock' ] }
+
+    //Apply a $slice limiting a `tags` array
+    // to the first two elements
+    ejdb> db.songs.find({$do : {tags : {$slice : 2}}});
+    Found 1 records
+    { _id: '553761dd19808d3c0000000b',
+      name: 'Let It Be',
+      tags: [ 'the beatles', 'rock' ] }
+
+
+    //Lets skip a first two and load up-to ten items
+    ejdb> db.songs.find({$do : {tags : {$slice : [2,10]}}});
+    Found 1 records
+    { _id: '553761dd19808d3c0000000b',
+      name: 'Let It Be',
+      tags: [ '60s', 'classic rock' ] }
+
+
+.. _$do:
+
+$do action directive
+--------------------
+
+The `$do` action directive is used in the following cases:
+
+* :ref:`joins`
+* Array `$slice (projection)`_ operator
+
+
+Performance considerations
+--------------------------
+
+* Only one index may be used in search query operation.
+
+* Negate operations: `$not`_ and `$nin`_ not using indexes
+  so they can be slow in comparison to other matching operations.
+
+* It is better to execute update queries with `JBQRYCOUNT` control flag set
+  to avoid unnecessarily data fetching. (C API)
+
 Glossary
 --------
 
@@ -593,80 +867,6 @@ Glossary
         is the path consisting of JSON field names traversed from the document's
         root to the particular document field.
 
-
-
-.. Create query object.
- * Sucessfully created queries must be destroyed with ejdbquerydel().
- *
- * EJDB queries inspired by MongoDB (mongodb.org) and follows same philosophy.
- *
- *  - Supported queries:
- *
- *      - Mongodb positional $ update operator supported. (http://docs.mongodb.org/manual/reference/operator/positional/)
- *
- *  - Queries can be used to update records:
- *
- *      $inc Increment operation. Only number types are supported.
- *          - {.., '$inc' : {'fpath1' : number, ...,  'fpath2' : number}
- *      $addToSet Atomically adds value to the array only if its not in the array already.
- *                If containing array is missing it will be created.
- *          - {.., '$addToSet' : {'fpath' : val1, 'fpathN' : valN, ...}}
- *      $addToSetAll Batch version if $addToSet
- *          - {.., '$addToSetAll' : {'fpath' : [array of values to add], ...}}
- *      $pull  Atomically removes all occurrences of value from field, if field is an array.
- *          - {.., '$pull' : {'fpath' : val1, 'fpathN' : valN, ...}}
- *      $pullAll Batch version of $pull
- *          - {.., '$pullAll' : {'fpath' : [array of values to remove], ...}}
- * 		$rename Rename field operation
- * 			- {.., '$rename' : {'oldfname1' : 'newfname1', 'oldfnameN' : 'newfnameN'}}
- *      $unset Unset the specified fields
- *          - { $unset: { 'fpath1' : "", ... } }
- *		$slice Array field slice operator (like a mongodb $slice) implemented
- * 			within $do operation.
- * 			- ${..., $do : {'fpath1' : {$slice : <limit>}}
- *  		- ${..., $do : {'fpath1' : {$slice : [<offset>, <limit>]}}
- *
- *
- * - Collection joins supported in the following form:
- *      {..., $do : {fpath : {$join : 'collectionname'}} }
- *      Where 'fpath' value points to object's OIDs from 'collectionname'. Its value
- *      can be OID, string representation of OID or array of this pointers.
- *
- *  NOTE: It is better to execute update queries with `JBQRYCOUNT`
- *        control flag to avoid unnecessarily data fetching.
- *
- *  NOTE: Negate operations: $not and $nin not using indexes
- *  so they can be slow in comparison to other matching operations.
- *
- *  NOTE: Only one index can be used in search query operation.
- *
- *  QUERY HINTS (specified by `hints` argument):
- *      - $max Maximum number in the result set
- *      - $skip Number of skipped results in the result set
- *      - $orderby Sorting order of query fields.
- *      - $fields Set subset of fetched fields
- *          If a field presented in $orderby clause it will be forced to include in resulting records.
- *          Example:
- *          hints:    {
- *                      "$orderby" : { //ORDER BY field1 ASC, field2 DESC
- *                          "field1" : 1,
- *                          "field2" : -1
- *                      },
- *                      "$fields" : { //SELECT ONLY {_id, field1, field2}
- *                          "field1" : 1,
- *                          "field2" : 1
- *                      }
- *                    }
- *
- * Many query examples can be found in `testejdb/t2.c` test case.
- *
- * @param jb EJDB database handle.
- * @param qobj Main BSON query object.
- * @param orqobjs Array of additional OR query objects (joined with OR predicate).
- * @param orqobjsnum Number of OR query objects.
- * @param hints BSON object with query hints.
- * @return On success return query handle. On error returns NULL.
- */
 
 
 
