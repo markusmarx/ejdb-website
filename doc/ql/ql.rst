@@ -841,8 +841,8 @@ The `$do` action directive is used in the following cases:
 * Array `$slice (projection)`_ operator
 
 
-Performance considerations
---------------------------
+Some performance considerations
+-------------------------------
 
 * Only one index may be used in search query operation.
 
