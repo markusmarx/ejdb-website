@@ -3,6 +3,10 @@
 Nodejs
 ======
 
+
+.. toctree::
+    api
+
 .. _nodejs_installation:
 
 Installation
@@ -17,7 +21,7 @@ the precompiled `ejdb-node` binary modules.
 Installation prerequisites
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Installed node v0.10.x or 0.12.x
+* Installed node v0.10.x oxr 0.12.x
 
 Installation
 ^^^^^^^^^^^^

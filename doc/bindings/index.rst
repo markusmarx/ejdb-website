@@ -4,6 +4,7 @@ EJDB language bindings
 ======================
 
 .. toctree::
+    :maxdepth: 1
 
     nodejs/index
     python

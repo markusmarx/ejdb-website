@@ -118,6 +118,16 @@ th.field-name, td.field-body {
   }
 }
 
+table.docutils.field-list {
+  width: 100%;
+
+  th.field-name {
+    width: 1%;
+  }
+}
+
+
+
 /* -- math display ---------------------------------------------------------- */
 
 img.math {
