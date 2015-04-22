@@ -137,8 +137,8 @@ We have top cars monthly rating
     ejdb>
 
 
-Get **June** top cars rating with array field joined with cars
-**************************************************************
+Get **June** top cars rating with joined array field
+****************************************************
 
 .. code-block:: js
 
