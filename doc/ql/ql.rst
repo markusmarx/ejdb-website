@@ -16,6 +16,12 @@ You can consider `abstract document` as a prototype for all possible documents i
 In the context of an `abstract document` a :term:`fieldpath` is the path consisting of JSON field names traversed
 from the document's root to the particular document field.
 
+
+EJDB aims to be query compatible with mongodb since it would provide easy
+application migration from/to mongodb and adoption of many developers experienced with
+mongodb.
+
+
 .. contents::
 
 Querying
@@ -54,8 +60,11 @@ As argument of simple matching query values you can use a regular expressions:
 
 .. _$not:
 
-Negation logical operation ($not)
-*********************************
+$not
+****
+
+Negation logical operation:
+
 
 ``{fieldpath : {$not : query}}``
 
@@ -79,8 +88,11 @@ Any part of query can be wrapped by `$not` negation operator:
 
 .. _$nin:
 
-Not in ($nin)
-*************
+$nin
+****
+
+Not in:
+
 
 ``{fieldpath : {$nin : [value1, value2, ...]}}``
 
@@ -95,14 +107,18 @@ The field value is not equal to any of provided alternatives.
 
 
 .. note::
+
     Negation operations: `$not` and `$nin` are not using collection indexes
     so they can be slower in comparison to other matching operations.
 
 
 .. _$in:
 
-Field equals to any member in the provided set ($in)
-****************************************************
+$in
+****
+
+Field equals to any member in the provided set:
+
 
 ``{fieldpath : {$in : [value1, value2, ...]}``
 
@@ -113,8 +129,11 @@ specified within `$in` array.
 
 .. _$icase:
 
-Case insensitive string matching ($icase)
-*****************************************
+$icase
+******
+
+Case insensitive string matching:
+
 
 ``{fieldpath : {$icase : query}}``
 
@@ -147,10 +166,11 @@ In order to perform effective case insensitive queries consider creating `JBIDXI
 
 .. _$begin:
 
-String starts with prefix ($begin)
-**********************************
+$begin
+******
 
-Fieldpath starts with specified prefix:
+Fieldpath starts with the specified prefix:
+
 
 ``{fieldpath : {$begin : prefix}} }``
 
@@ -256,8 +276,11 @@ are used for numeric datatypes.
 
 .. _$stror:
 
-String tokens matching ($stror)
-*******************************
+$stror
+******
+
+String tokens matching:
+
 
 ``{fieldpath:  {$stror: [value1, value2, ....]}``
 
@@ -292,8 +315,11 @@ String tokens matching ($stror)
 
 .. _$strand:
 
-String tokens matching ($strand)
-********************************
+$strand
+*******
+
+String tokens matching:
+
 
 ``{fieldpath:  {$strand: [value1, value2, ....]}``
 
@@ -311,8 +337,11 @@ String tokens matching ($strand)
 
 .. _$exists:
 
-Fieldpath existence checking ($exists)
-**************************************
+$exists
+*******
+
+:term:`Fieldpath` existence checking:
+
 
 ``{fieldpath: {$exists: true|false}}``
 
@@ -322,8 +351,11 @@ that do not contain the specified `fieldpath`.
 
 .. _$elemMatch:
 
-Array element matching ($elemMatch)
-***********************************
+$elemMatch
+**********
+
+Array element matching:
+
 
 ``{fieldpath: {$elemMatch: query}}}``
 
@@ -419,6 +451,7 @@ Where `mode` is an integer specified the field inclusion mode:
 * `1` Include field
 
 .. note::
+
     `$fields` hint cannot mix include and exclude fields together
 
 The mongodb `$ (projection) <http://docs.mongodb.org/manual/reference/operator/projection/positional/#proj._S_>`_ is also supported.
@@ -868,9 +901,9 @@ Glossary
         You can consider `abstract document` as a prototype for all possible documents in the collection.
 
     fieldpath
-        In the context of an `abstract document` a :term:`fieldpath`
-        is the path consisting of JSON field names traversed from the document's
-        root to the particular document field.
+        In the context of an :term:`abstract document` a `fieldpath`
+        is the path consisting of JSON field names traversed from the document
+        root to the particular document field joined together by `.` symbol.
 
 
 

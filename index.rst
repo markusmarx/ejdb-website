@@ -43,6 +43,7 @@ Documentation
     doc/cli
     doc/ql/ql
     doc/ql/joins
+    doc/internals/index
     Language bindings <doc/bindings/index>
     doc/iexp/index
 
