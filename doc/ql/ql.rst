@@ -856,6 +856,12 @@ Glossary
 
 .. glossary::
 
+    OID
+    ObjectId
+        ObjectId (OID) is a unique identifier of every document stored in EJDB collection.
+        You can consider OID as document's primary key. OID is a 12-byte value integer the same
+        format as `defined in Mongodb BSON specification <http://docs.mongodb.org/manual/reference/object-id/>`_.
+
     abstract document
         Abstract document is a  metadocument for all documents containing in particular collection without an actual
         field values and with all possible document fields and their types belonging to any document the collection.

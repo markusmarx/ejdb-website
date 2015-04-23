@@ -62,6 +62,7 @@ Import `mode` is an integer flag describes the following options:
                      Missing collections will be created.
 
 
+.. _cmd_response:
 .. _import_cmd_response:
 .. _export_cmd_response:
 
