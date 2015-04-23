@@ -16,7 +16,6 @@ You can consider `abstract document` as a prototype for all possible documents i
 In the context of an `abstract document` a :term:`fieldpath` is the path consisting of JSON field names traversed
 from the document's root to the particular document field.
 
-
 EJDB aims to be query compatible with mongodb since it would provide easy
 application migration from/to mongodb and adoption of many developers experienced with
 mongodb.
@@ -474,7 +473,10 @@ means here the array index of the mached record.
 .. code-block:: js
 
     // Not using $ projection
-    ejdb> db.persons.find({childs : {$elemMatch : {name: 'Garry', age:2}}}, {$fields : {'childs' : 1}});
+    ejdb> db.persons.find({
+                            childs : {$elemMatch :
+                                        {name: 'Garry', age:2}}
+                          }, {$fields : {'childs' : 1}});
     Found 1 records
     { childs:
        [ { name: 'Garry', age: 2 },
@@ -482,7 +484,10 @@ means here the array index of the mached record.
 
 
     // Usign $ projection
-    ejdb> db.persons.find({childs : {$elemMatch : {name: 'Garry', age:2}}}, {$fields : {'childs.$' : 1}});
+    ejdb> db.persons.find({
+                            childs : {$elemMatch :
+                                        {name: 'Garry', age:2}}
+                          }, {$fields : {'childs.$' : 1}});
     Found 1 records
     { _id: '5536764019808d3c00000004',
       childs: [ { name: 'Garry', age: 2 } ] }

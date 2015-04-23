@@ -3,6 +3,8 @@
 EJDB Internals
 ==============
 
+.. contents::
+
 Tokyo Cabinet
 -------------
 
@@ -150,5 +152,4 @@ consistent transaction rollbacks.
 
 Implementation of parallel, read-commited ACID
 transactions requires a further development.
-
 

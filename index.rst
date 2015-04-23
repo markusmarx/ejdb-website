@@ -38,6 +38,7 @@ Documentation
 .. toctree::
     :maxdepth: 1
 
+    news
     doc/snippets
     doc/install/index
     doc/cli
@@ -46,15 +47,5 @@ Documentation
     doc/internals/index
     Language bindings <doc/bindings/index>
     doc/iexp/index
-
-
-
-.. ee toctree
-    doc/intro/5min  intro/index
-    installation/buildinginstallation
-    samples/samples
-    capi
-    ql/queries
-    misc/dataimport
-    misc/collectionjoins
-    developmentfaq
+    doc/limitations
+    doc/mongodb

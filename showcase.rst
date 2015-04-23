@@ -1,3 +1,6 @@
+:orphan:
+
+
 .. The EJDB documentation
 
 Welcome to EJDB!
