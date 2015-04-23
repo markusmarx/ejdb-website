@@ -7,11 +7,11 @@ EJDB language bindings
     :maxdepth: 1
 
     nodejs/index
-    python
-    java
-    lua
-    ruby
-    dotnet
+    Python <https://github.com/Softmotions/ejdb-python>
+    Java <https://github.com/Softmotions/ejdb-java>
+    Lua <https://github.com/Softmotions/ejdb-lua>
+    Ruby <https://github.com/Softmotions/ejdb-ruby>
+    .Net <https://github.com/Softmotions/ejdb-csharp>
     thirdparty
 
 

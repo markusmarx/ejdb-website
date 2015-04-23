@@ -186,7 +186,7 @@ Python
 
 .. seealso::
 
-      :ref:`Python language binding <python>`
+     `Python language binding <https://github.com/Softmotions/ejdb-python>`_
 
 
 Lua
@@ -257,7 +257,7 @@ Lua
 
 .. seealso::
 
-     :ref:`Lua language binding <lua>`
+     `Lua language binding <https://github.com/Softmotions/ejdb-lua>`_
 
 
 Ruby
@@ -306,7 +306,7 @@ Ruby
 
 .. seealso::
 
-     :ref:`Ruby language binding <ruby>`
+     `Ruby language binding <https://github.com/Softmotions/ejdb-ruby>`_
 
 
 C#
@@ -375,7 +375,7 @@ C#
 
 .. seealso::
 
-     :ref:`C# language binding <dotnet>`
+     `C# language binding <https://github.com/Softmotions/ejdb-csharp>`_
 
 
 .. code-block:: java
@@ -485,7 +485,7 @@ C#
 
 .. seealso::
 
-     :ref:`Java language binding <java>`
+     `Java language binding <https://github.com/Softmotions/ejdb-java>`_
 
 
 Go

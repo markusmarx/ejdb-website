@@ -1,6 +1,0 @@
-.. _python:
-
-Python
-======
-
-todo
