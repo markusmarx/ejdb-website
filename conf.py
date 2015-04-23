@@ -142,12 +142,12 @@ html_theme = 'sphinx_material_theme'
 html_theme_path = [sphinx_material_theme.get_html_theme_path()]
 html_theme_options = {
     'top_nav_links': [
-        ('News', '#'),
-        ('Downloads', '#'),
+        ('News', 'http://ejdb.org/news.html'),
+        ('Downloads', 'http://ejdb.org/doc/install/index.html'),
         ('Issues', 'https://github.com/Softmotions/ejdb/issues')
     ],
 
-    #'analytics_id' : 'UA-36241306-1'
+    'analytics_id' : 'UA-36241306-1'
 }
 
 html_sidebars = {

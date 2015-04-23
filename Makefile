@@ -52,6 +52,9 @@ clean:
 html:
 	make -C sphinxext/sphinx_material_theme
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	cp -R gendocs/* $(BUILDDIR)/html
+	cp -R root/* $(BUILDDIR)/html
+	touch $(BUILDDIR)/html/.nojekyll
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
