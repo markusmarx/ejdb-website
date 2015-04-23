@@ -1,3 +1,4 @@
+.. _cmd:
 .. _iexp:
 
 Import/Export database data
