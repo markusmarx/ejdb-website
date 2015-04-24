@@ -1,7 +1,7 @@
 .. _limitations:
 
-Known EJDB limitations
-======================
+Known limitations
+=================
 
 Tokyo Cabinet issues
 --------------------
