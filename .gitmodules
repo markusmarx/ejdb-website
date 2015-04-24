@@ -1,0 +1,3 @@
+[submodule "sphinxext/sphinx_material_theme"]
+	path = sphinxext/sphinx_material_theme
+	url = https://github.com/Softmotions/sphinx_material_theme.git
