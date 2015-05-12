@@ -78,7 +78,7 @@ First of all you need to checkout the `MXE cross build environment <http://mxe.c
 
 .. code-block:: sh
 
-    git clone -b stable https://github.com/mxe/mxe.git
+    git clone https://github.com/mxe/mxe.git
 
 Then create/edit MXE settings file:
 
