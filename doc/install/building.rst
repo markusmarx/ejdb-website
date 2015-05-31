@@ -63,6 +63,9 @@ CMake basic build(-D) options
     // Build .tgz package archive
     PACKAGE_TGZ:BOOL=ON
 
+    // Build .zip package archive
+    PACKAGE_ZIP:BOOL=OFF
+
     // Upload debian packages to the launchpad ppa repository
     UPLOAD_PPA:BOOL=OFF
 
